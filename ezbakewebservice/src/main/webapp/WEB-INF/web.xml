@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<web-app 
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+   version="3.0">
+  
+   <!-- JAX-RS configuration --> 
+   <servlet>
+      <!-- 
+          Note: this servlet name can be anything, it does not need
+          to actually exist in our package.  However, it must match 
+          the servlet name used in the <sevlet-mapping> section below.
+      -->
+      <servlet-name>ezbake-webservice</servlet-name>
+      <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+      <init-param>
+         <param-name>javax.json.stream.JsonGenerator.prettyPrinting</param-name>
+         <param-value>true</param-value>
+      </init-param>
+      <init-param>
+         <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+         <param-value>true</param-value>
+      </init-param>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>ezbake-webservice</servlet-name>
+      <url-pattern>/*</url-pattern>
+   </servlet-mapping>
+        
+   <!-- 
+       For EzSecurity
+   --> 
+   <listener>
+      <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+   </listener>
+   
+   <!-- 
+      JBoss workaround, related information is here: http://stackoverflow.com/a/12185880/320399
+   --> 
+   <context-param>
+      <param-name>resteasy.scan</param-name>
+      <param-value>false</param-value>
+   </context-param>
+   <context-param>
+      <param-name>resteasy.scan.resources</param-name>
+      <param-value>false</param-value>
+   </context-param>
+   <context-param>
+      <param-name>resteasy.scan.providers</param-name>
+      <param-value>false</param-value>
+   </context-param>
+    
+   <welcome-file-list>
+      <welcome-file>index.jsp</welcome-file>
+   </welcome-file-list>
+   
+</web-app>     

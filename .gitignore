@@ -1,0 +1,27 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+dependency-reduced-pom.xml
+
+# NodeJS
+node_modules/
+npm-debug.log
+meta.json
+coverage.html
+build/
+
+# Vagrant
+.vagrant/

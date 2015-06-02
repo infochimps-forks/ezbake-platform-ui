@@ -1,0 +1,21 @@
+Application:
+ name: ezconfigws
+
+ Services:
+  -
+     type: WebApp
+     web_app_name: ezconfigws
+     scaling:
+       number_of_instances: 1
+     artifact_info:
+       resources:
+         cpu: small
+         mem: small
+         disk: small
+       language: Java
+       bin: ROOT.war
+     external_web_url: ezbake-webservice
+     upload_file_size: 2
+     timeout: 15
+     timeout_retries: 5
+     sticky_session: false

@@ -1,0 +1,29 @@
+{
+  "name": "EfeStaticUIComponents",
+  "version": "2.1",
+  "authors": [
+    "EzBake Developers <developers@ezbake.io>"
+  ],
+  "description": "EzBake Web UI Static Components",
+  "keywords": [
+    "ezbake",
+    "ezbake-ui",
+    "web-components",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests",
+    "bower.json"
+  ],
+  "dependencies": {
+    "classification-banner": "../../classificationbanner/"
+  },
+  "private":true
+}
+

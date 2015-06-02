@@ -1,0 +1,2 @@
+ssldir: "/opt/ezfrontend-ui/etc/ezbake/pki/cert"
+override_props_dir: "/opt/ezfrontend-ui"
