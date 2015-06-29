@@ -1,0 +1,27 @@
+<h3>The purge request was initiated successfully</h3>
+<br>
+<h4>Purge Information</h4>
+<table class="wh-table table">
+   <tbody>
+      <tr>
+         <td class="left-header">ID</td>
+         <td><a ui-sref="purge-status({ purgeId : {{purgeResult.purgeId}} })">{{purgeResult.purgeId}}</a></td>
+      </tr>
+      <tr>
+         <td class="left-header">Name</td>
+         <td>{{purgeResult.name}}</td>
+      </tr>
+      <tr>
+         <td class="left-header">Description</td>
+         <td>{{purgeResult.description}}</td>
+      </tr>
+   </tbody>
+</table>
+<div ng-show="purgeResult.hasUrisNotFound()">
+   <h4>URIs Not Found</h4>
+   <table class="wh-table table">
+   <tbody>
+      <tr ng-repeat="uri in purgeResult.urisNotFound"><td>{{uri}}</td></tr>
+   </tbody>
+   </table>
+</div>

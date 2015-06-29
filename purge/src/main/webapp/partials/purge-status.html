@@ -1,0 +1,121 @@
+<h2>Purge Status</h2>
+<div class="spinner-wrapper" ng-show="spinner.isInProgress">
+  <div class="spinner" title="{{spinner.title}}"></div>
+  <div class="spinner-content">{{spinner.message}}</div>
+</div>
+<p ng-show="displayNotFound">
+  Purge <span class="wh-emphasize">{{purgeId}}</span> was not found.
+</p>
+<div ng-show="displayEntry">
+
+  <!-- Tab Navigation -->
+  <ul id="purgeStatusTabs" class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#overview" role="tab" data-toggle="tab">Overview</a></li>
+    <li><a href="#documentState" role="tab" data-toggle="tab">Document States</a></li>
+    <li><a href="#applicationState" role="tab" data-toggle="tab">Application States</a></li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div id="purgeStatusContent"
+    class="tab-content tab-content-top-padding">
+    <h3>Purge ID {{purge.id}}</h3>
+    <br>
+    
+    <div class="tab-pane fade in active" id="overview">
+      <table class="wh-table table">
+        <tbody>
+          <tr>
+            <td class="left-header">Name</td>
+            <td>{{purge.name}}</td>
+          </tr>
+          <tr>
+            <td class="left-header">Description</td>
+            <td class="">{{purge.description}}</td>
+          </tr>
+          <tr>
+            <td class="left-header">User</td>
+            <td>{{purge.user}}</td>
+          </tr>
+          <tr>
+            <td class="left-header">Timestamp</td>
+            <td>{{purge.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+          </tr>
+          <tr>
+            <td class="left-header">Central Purge Type</td>
+            <td>{{purge.centralPurgeType}}</td>
+          </tr>
+          <tr>
+            <td class="left-header">Central Purge Status</td>
+            <td>{{purge.centralPurgeStatus}}
+                <button type="button" class="btn btn-default btn-sm" ng-click="resolvePurge()"  title="Manually Resolve Purge" ng-show="manualInterventionNeeded(purge.centralPurgeStatus)" >Resolve Purge</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="left-header">Resolved</td>
+            <td>{{purge.resolved}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane fade" id="documentState">
+      <table class="wh-table table">
+        <thead>
+          <tr>
+            <th>URI</th>
+            <th>Purge Document Id</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="docState in purge.documentStates">
+            <td>{{docState.uri}}</td>
+            <td>{{docState.purgeDocumentId}}</td>
+            <td>{{docState.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane fade" id="applicationState">
+      <div ng-repeat="appState in purge.applicationStates">
+        <h4>{{appState.applicationName}}</h4>
+        <table class="wh-table table">
+          <thead>
+            <tr>
+              <th>Service Name</th>
+              <th>Status</th>
+              <th>Initiated Timestamp</th>
+              <th>Last Poll Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="svcState in appState.serviceStates">
+              <td>{{svcState.serviceName}}</td>
+              <td>{{svcState.status}}</td>
+              <td>{{svcState.initiatedTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+              <td>{{svcState.lastPollTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- 
+   <pre>{{purge | json}}</pre>
+ -->
+  </div>
+</div>
+<script>
+   $('#purgeStatusTabs a[href="#overview"]').click(function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+   });
+   $('#purgeStatusTabs a[href="#documentState"]').click(function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+   });
+   $('#purgeStatusTabs a[href="#applicationState"]').click(function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+   });
+</script>

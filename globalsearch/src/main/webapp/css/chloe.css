@@ -1,0 +1,320 @@
+/* Cloe */
+
+#appsPanel .app-id {
+    display: none;
+}
+
+#appsPanel .owner-id {
+    display: none;
+}
+
+#appsPanel {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+#chloe-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+#chloe-container:hover {
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+#chloe-container:hover .app-holder {
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.chloe-handle {
+    position: absolute;
+    top: 0;
+}
+
+.app-holder {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+#appsPanel .header {
+    white-space: nowrap;
+}
+
+#appsPanel .app {
+    font-size: 9pt;
+    height: 40px;
+    color: #000;
+    width: 200px;
+    padding-left: 20px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    cursor: pointer;
+}
+
+#appsPanel .app:hover {
+    background: #f2f2f2;
+}
+
+#appsPanel .app .app-subtitle {
+    font-size: 7.5pt;
+    color: #999;
+    margin-top: 4px;
+}
+
+#appsPanel .app .app-thumbnail, .chloe-submenu .user .user-thumbnail {
+    float: left;
+    height: 33px;
+    width: 33px;
+}
+
+#appsPanel .app .app-text {
+    float: left;
+    padding: 5px;
+    width: 110px;
+}
+
+#appsPanel .app .app-text .app-uri {
+    display: none;
+}
+
+#appsPanel .app .app-close {
+    position: relative;
+    top: 0;
+    right: 0;
+    font-size: 6pt;
+    padding: 0;
+    margin: 0;
+}
+
+#appsPanel .app .app-close span {
+    color: grey;
+}
+
+#appsPanel .app .app-close span:hover {
+    color: red;
+}
+
+#appsPanel hr {
+    margin: 0;
+}
+
+#appsPanel .notification {
+    font-size: 9pt;
+    height: 60px;
+    color: #000;
+    width: 200px;
+    padding-left: 20px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    padding-right: 5px;
+}
+
+#appsPanel .notification button {
+    font-size: 9pt;
+    margin-right: 5px;
+}
+
+#appsPanel .notifications-count {
+    position: relative;
+    background: red;
+    margin-top: 7px;
+    margin-left: 7px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 9pt;
+    text-align: center;
+    border-radius: 9px;
+    color: #fff;
+}
+
+.chloe-submenu {
+    width: 220px;
+    position: absolute;
+    right: 200px;
+    background: #fff;
+    display: none;
+    border: 1px solid #d5d5d5;
+    border-right: none;
+    top: 32px;
+    bottom: auto;
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+}
+
+.chloe-submenu h1 {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    background: #3197cb;
+    font-size: 14pt;
+}
+
+.chloe-submenu div:first-of-type {
+    width: 220px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    background: #3197cb;
+}
+
+.chloe-submenu h1 {
+    display: inline;
+    font-size: 14pt;
+    padding: 0 10px 0 10px;
+}
+
+.chloe-submenu h2 {
+    display: inline;
+    font-size: 10pt;
+}
+
+.chloe-submenu button {
+    width: 220px;
+    background: #5faf17;
+    color: #fff;
+    font-size: 9pt;
+    border: none;
+    height: 32px;
+}
+
+.chloe-submenu button:focus {
+    outline: none;
+}
+
+.chloe-submenu .chosen-container-multi .chosen-choices li.search-field input[type=text] {
+    padding: 10px 0 0 0;
+    height: auto;
+    text-shadow: #fff 0 1px 0;
+    color: #a5a5a5;
+}
+
+.chloe-submenu .chosen-container-multi .chosen-choices {
+    background: #eaeaea;
+    font-size: 10pt;
+    color: #2a2a2a;
+    min-width: 220px;
+    min-height: 40px;
+    padding-left: 15px;
+}
+
+.chloe-submenu .chosen-container-multi .chosen-choices li.search-choice {
+    background-color: #fff;
+    padding: 5px 30px 5px 5px;
+    margin: 7px 0 5px 5px;
+}
+
+.chloe-submenu .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    top: 5px;
+    right: 6px;
+}
+
+.chloe-submenu .chosen-container-active .chosen-choices {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    background: #f6f6f6;
+    transition: all 500ms;
+}
+
+.chloe-submenu .chosen-container .chosen-results li.highlighted {
+    background-color: #3399cc;
+}
+
+.chloe-submenu .chosen-container .chosen-drop {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
+    border-radius: 0 0 3px 3px;
+    height: auto;
+}
+
+/* moving mike's chloe styles out of main.css */
+#appsPanel {
+    top: 116px;
+}
+
+#appsPanel #chloe-container {
+    top: 116px;
+}
+
+#appsPanel #chloe-container .chloe-handle {
+    width: 33px;
+    height: 33px;
+    background: #f5f5f5;
+    border: 1px solid #d5d5d5;
+    border-right: none;
+    text-align: center;
+}
+
+#appsPanel #chloe-container .chloe-handle .icon {
+    display: inline-block;
+    font-size: 14px;
+    padding-top: 10px;
+    color: #858585;
+}
+
+#appsPanel #chloe-container .app-holder {
+    top: 116px;
+    height: 100%;
+    background: #fff;
+    border: 1px solid #d5d5d5;
+    border-right: none;
+    border-bottom: none;
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+}
+
+#appsPanel #chloe-container .app-holder {
+
+}
+
+#appsPanel #chloe-container .app-holder .header {
+    padding: 10px;
+    font-size: 10px;
+    color: #858585;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+#appsPanel #chloe-container .app-holder .header:not(:first-child) {
+    border-top: 1px solid #d5d5d5;
+}
+
+#appsPanel #chloe-container .app-holder .app {
+
+}
+
+#appsPanel #chloe-container .app-holder .app .app-thumbnail {
+
+}
+
+#appsPanel #chloe-container .app-holder .app .app-thumbnail .icon {
+    display: inline-block;
+    font-size: 18px;
+    padding: 7px 5px;
+}
+
+#appsPanel #chloe-container .app-holder .app .app-text .app-subtitle {
+    font-size: 10px;
+    margin: 0;
+}

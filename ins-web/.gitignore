@@ -1,0 +1,16 @@
+.DS_Store
+dist
+node_modules/
+target/
+.idea
+*.jar
+*.war
+*.iml
+.settings/
+.classpath
+/dist
+/bin
+/src/main/webapp/components/
+/target
+/node_modules
+.project

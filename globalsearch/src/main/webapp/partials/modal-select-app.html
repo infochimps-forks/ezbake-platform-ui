@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-hidden="true">×</button>
+    <h3>Open With...</h3>
+</div>
+<div class="modal-body">
+    <div>
+        <label><input type="radio" name="app" value="{{selectedResult.value.viewerUrl}}"/> Viewer</label>
+        <br/>
+    </div>
+    <div ng-repeat="link in selectedResult.value.webApplicationLinks">
+        <label><input type="radio" name="app" value="{{link.webUrl}}" ng-model="openWith.url"/> {{link.appName}}</label>
+        <br/>
+    </div>
+    <label><input type="checkbox" ng-model="rememberSelection.value"/> Remember selection</label>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn" ng-click="cancel()">Close</button>
+    <button class="btn btn-primary" ng-click="ok()">Open With</button>
+</div>

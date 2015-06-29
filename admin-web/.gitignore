@@ -1,0 +1,11 @@
+/target
+/.settings
+/.idea
+.DS_Store
+.classpath
+.project
+*.iml
+/dist
+/node_modules
+/src/main/webapp/components
+/src/test/webapp/node_modules

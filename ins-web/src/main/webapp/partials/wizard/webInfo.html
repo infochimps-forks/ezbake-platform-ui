@@ -1,0 +1,92 @@
+<ng-form name="webInfoForm">
+    <div class="form-content" id="regproc-web-application-info">
+        <div>
+            <div class="input-container">
+                <h2>Your App's URL:</h2>
+                <div class="input-label label-middle">https://&lt;frontend&gt;/</div>
+                <div class="input-field">
+                    <input name="externalUri" ng-model="currentApplication.webApp.externalUri" class="input" ng-required="page.answer" ng-pattern="/^[a-zA-Z0-9_\-]+$/" />
+                </div>
+                <div class="font-red mar-t10 mar-b20">
+                    <div ng-show="webInfoForm.externalUri.$error.pattern">Url can only contain letters, numbers, hyphens, and underscores</div>
+                    <div ng-show="webInfoForm.externalUri.$error.required">Url is required</div>
+                </div>
+            </div>
+            <div class="divider"></div>
+                <h2>Add Group Name: (optional)</h2>
+                <p>If your application requires users to be in a group to access, enter that group here. <span class="bold">NOTE:</span> This doesn't control access to your application. This will allow other apps to only show a link to your app if the user has access</p>
+	            <div class="input-container">
+	                <div class="input-label">Group Name</div>
+	                <div class="input-field">
+	                    <input ng-model="currentApplication.webApp.requiredGroupName" class="input" placeholder="Group Name" />
+	                </div>
+	            </div>
+            <div class="divider"></div>
+            <div>
+                <h2>Add 'Open With' File Type:</h2>
+                <p>This allows your application to register for <span class="bold">'Open With...'</span> behavior to let other applications know what type of data your application is capable of viewing. For each type, you must supply the path to your web application (relative to the Front End) and it must include {uri} in the path. <span tooltip-html-unsafe="{{htmlTooltip}}" tooltip-placement="bottom" tooltip-append-to-body="true" class="bold font-blue">View Example</span></p>
+                <div class="input-container">
+                    <div class="input-label">Select Prefix</div>
+                    <div class="input-field">
+                        <select name="webAppKey" ng-model="webAppKey" ng-options="p for p in prefixes" class="file-type" placeholder="Select URI"/>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">Add Relative URL</div>
+                    <div class="input-field">
+                        <input name="webAppUrl" ng-model="webApp.webUrl" class="input" placeholder="Your application's relative URL" ng-pattern="/{uri}/"/>
+                        <div class="font-red mar-t10 mar-b20">
+                            <div ng-show="webInfoForm.webAppUrl.$error.pattern">Web Url must contain '{uri}' and your web url</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">Pass Full URI (including prefix)?</div>
+                    <div class="input-field">
+                        <input ng-model="webApp.includePrefix" id="checkbox-4-1" type="checkbox" class="regular-checkbox" /><label for="checkbox-4-1"></label>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-field">
+                        <button type="button" class="btn gray" title="Add Open With File Type" alt="Add Open With File Type" ng-click="addUrnMapping(webAppKey, webApp)">Save File Type</button>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-field">
+                        <ul class="no-disc">
+                            <li ng-repeat="(urnkey, webUri) in currentApplication.webApp.urnMap" class="relative">
+                                <div class="data-item">
+                                    <div class="item-container">{{urnkey}} => {{webUri | uriExample:urnkey}}</div>
+                                    <button type="button" class="remove" title="Remove URN Mapping" alt="Remove URN Mapping" ng-click="removeUrnMapping(urnkey)"><span aria-hidden="true" class="icon-remove"></span></button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="input-container">
+                <div class="input-label">Are you a Chloe-Enabled application?</div>
+                <div class="input-field">
+                    <button class="btn radio" btn-radio="true" type="button" ng-model="currentApplication.webApp.isChloeEnabled">Yes</button>
+                    <button class="btn radio" btn-radio="false"  type="button" ng-model="currentApplication.webApp.isChloeEnabled">No</button>
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="input-label"></div>
+                <div class="input-field">
+		                            <span ng-show="currentApplication.webApp.isChloeEnabled">
+		                                <div class="mar-t30">
+                                            If you are Chloe-enabled, enter your URL here.  Select NO if you don't know what Chloe-Enabled means.<br/>
+                                            <input ng-model="currentApplication.webApp.chloeWebUrl" class="input mar-t10" placeholder="Enter Chloe Web URL" />
+                                        </div>
+		                            </span>
+                </div>
+            </div>
+            <div class="centered mar-t20">
+                <button type="button" ng-disabled="webInfoForm.$invalid" class="btn large-btn" ng-click="continueRegistration(page, 'no')">Continue</button>
+                <button type="button" class="cancel-app cancel-small" ng-click="continueRegistration(page, 'cancel')">Cancel</button>
+            </div>
+        </div>
+    </div>
+</ng-form>

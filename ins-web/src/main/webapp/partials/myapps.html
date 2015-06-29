@@ -1,0 +1,120 @@
+<div id="dialog">
+</div>
+<div class="main-navigation-wrapper" id="home-nav" ng-show="homeEnabled === 1">
+    <div class="main-navigation"></div>
+</div>
+<div class="main-navigation-wrapper" id="myapps-nav" ng-show="homeEnabled === 2">
+	<div class="main-navigation">
+		<div class="logo">
+			<img ng-click="homeEnabled = 1" src="./images/engine-logo.svg" alt="App Engine">
+		</div>
+        <div class="home">
+            <div ng-click="homeEnabled = 1"><span aria-hidden="true" class="icon-house"></span></div>
+        </div>
+	</div>
+</div>
+<div class="content-wrapper">
+<div id="home-section" ng-show="homeEnabled === 1">
+    <div class="home-wrapper">
+        <div class="home-logo">
+            <div class="home-logo">
+                <div class="piston right">
+                    <img src="./images/piston.svg" class="animated bounceRight piston-right">
+                </div>
+                <div class="piston left">
+                    <img src="./images/piston.svg" class="animated bounceLeft piston-left">
+                </div>
+                <img src="./images/engine-logo-hero.svg" alt="App Engine" class="engine-logo">
+                <img src="./images/large-gear.svg" class="large-gear">
+                <img src="./images/small-gear.svg" class="small-gear">
+            </div>
+        </div>
+    </div>
+    <div class="centered">
+        <button type="button" class="btn home-btn" onClick="location.href='#/application/0'">Start Your Application</button>
+        <br />
+        <a ng-click="homeEnabled = 2">or import your application registration here</a>
+    </div>
+</div>
+<div id="myapps-section" ng-show="homeEnabled === 2">
+<h1 class="inline">My Applications</h1>
+    <div class="inline myapps-controls">
+    	<div data-ng-init="isAllowedToRegisterApplication()">
+    		<div ng-if="isAllowedToRegister == 'true'">
+                <div ng-controller="FileUploadCtrl" id="importApp" class="import">
+                    <div class="import-btn-over">
+                        <button class="import-btn btn gray">Import Application</button>
+                        <input type="file" ng-file-select="importApplicationReg($files)">
+                    </div>
+                </div>
+        		<a href="#/application/0" class="btn">Create New</a>
+        	</div>
+        	<div ng-if="isAllowedToRegister == 'false'">
+        		<p>Reached maximum number of applications PENDING registration.</p>
+        	</div>
+    	</div>
+    </div>
+        <div class="application-wrapper">
+            <div class="application-container" id="slide-in-container-id" ng-repeat="application in myApplications" >
+                <div class="masthead">
+                    <h2>{{application.appName}}</h2>
+                    <div data-ng-init="registrationStatus(application)">Status: {{application.registrationStatus}}</div>
+                    <div class="base-controls">
+                        <ul class="app-options">
+							<li><button class="options-btn" alt="Options" title="Options"><div aria-hidden="true" class="groups-ellipsis"></div></button>
+	                            <ul>
+	                                <li><button ng-click="" alt="Manage Groups"><span aria-hidden="true" class="groups-users"></span>Manage Groups</button></li>
+	                                <li><button ng-click="downloadApplication(application.id)" alt="Download"><span aria-hidden="true" class="icon-in"></span>Download</button></li>
+	                                <li><button ng-click="linkTo('/application/' + application.id)" alt="Edit"><span aria-hidden="true" class="icon-pencil"></span>Edit</button></li>
+	                                <li><button ng-confirm-click=" Are you sure you want to delete this application?" callback-yes="deleteApplication(application.id)" alt="Delete Application"><span aria-hidden="true" class="icon-remove"></span>Remove</button></li>
+	                            </ul>
+							</li>
+						</ul>
+                    </div>
+                </div>
+                <div class="deployments">
+                    <div class="title">Deployments:
+                        <button type="button" class="arrow" ng-click="getListOfDeployedPackages(application, $event)" alt="List all package deployments">
+                            <div ng-if="!application.show"><span aria-hidden="true" class="icon-arrow-down" alt="Show Deployments" title="Show Deployments" ></span></div>
+                            <div ng-if="application.show"><span aria-hidden="true" class="icon-arrow-up" alt="Hide Deployments" title="Hide Deployments"></span></div>
+                        </button>
+                    </div>
+                    <ul class="deployments-list">
+                        <li ng-repeat="deployedPackage in application.packages">
+                            <div class="deployment-package">{{deployedPackage.appServiceId}}
+                                <span ng-if="deployedPackage.ezfrontEndLink && deployedPackage.ezfrontEndLink.trim() !== '' && deployedPackage.status === 'Deployed'"><a target="_blank" ng-href="https://{{deployedPackage.ezfrontEndLink}}"> Web Link </a></span>
+                                <span>{{deployedPackage.status}}</span>
+                            </div>
+
+                            <div class="deployment-controls">
+                                <button ng-if="deployedPackage.status === 'Deployed' && deployedPackage.canDeploy===true" type="button" class="btn remove-deployment" title="Undeploy" alt="Undeploy" ng-confirm-click="Are you sure you want to undeploy this application?" callback-yes="unDeploy(application, $index, $event)"><span aria-hidden="true" class="icon-remove"></span></button>
+                                <button ng-if="deployedPackage.status === 'Staged'" type="button" class="btn remove-deployment" title="Unstage" alt="Unstage" ng-confirm-click="Are you sure you want to unstage this application?" callback-yes="unStage(application, $index)"><span aria-hidden="true" class="icon-remove"></span></button>
+                            </div>
+                       </li>
+                       <div ng-controller="ModalWindowCtrl">
+						    <script type="text/ng-template" id="templateContent"> 
+								<dialog-window-node>		
+								<div class="dialog-window-close" ng-click="close()"><span aria-hidden="true" class="icon-close"></span></div>
+								<div ng-include="'partials/deploy.html'"></div>
+								</dialog-window-node>
+    						</script>
+                       		<li class="add-new" ng-if='application.isDeployShow && application.show'>
+                       			<button type="button" class="add-new" ng-click="open()" dialog-window-node alt="Add New Deployment Package"><span aria-hidden="true" class="icon-plus"></span> Add New Deployment Package</button>
+                       		</li>
+                           <div ng-hide='application.isDeployShow' class="mar-t10">Your application registration must be approved before you can deploy</div>
+                       </div> 
+                   </ul>
+                </div>
+                <div class="base">
+                </div>
+            </div>
+        </div>
+        <div class="centered-spinner">
+                <div class="spinner-wrapper" ng-show="showUndeployLoader">
+                    <div class="spinner" title="Deploying application."></div>
+                    <div class="spinner-content">...Processing</div>
+                </div>
+        </div>
+     </div>
+</div>
+<toaster-container toaster-options="{'time-out': 5000, 'close-button':true}"></toaster-container>

@@ -1,0 +1,13 @@
+<div id="sidebar">
+    <div class="facets" ng-repeat="(category, facet) in resultObject.facets">
+        <div class="facetBox source">
+            <h2>{{category}}</h2>
+            <ul ng-repeat="(index, props) in facet">
+                <li ng-class="{ 'active': props.selected == true }">
+                    <img src="img/sidebar-active.gif"/>
+                    <a href="" onclick="return false;" ng-click="toggleFacet(category,index);">{{props.label}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+# Maven
+target/
+
+# Eclipse
+.settings/
+.classpath
+.project 
+
+# NetBeans
+nb-configuration.xml
+
+# OSX
+.DS_Store
+
+# NodeJS / Gulp build directories
+src/main/webapp/dist
+src/main/webapp/node
+node_modules
+
+# IntelliJ
+*.iml
+.idea

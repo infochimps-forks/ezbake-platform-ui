@@ -1,0 +1,60 @@
+<div class="builder-wrapper">
+    <div class="query-builder" global-search-enter="searchRedirect()">
+        <div class="builder-header clearfix">
+            <!-- <h1>GLOBAL SEARCH</h1> -->
+            <a href="#"><img src="img/logo.png"/></a>
+
+            <h2>ADVANCED SEARCH</h2>
+            <!-- <hr /> -->
+        </div>
+        <div class="builder-content-wrapper">
+            <div class="builder-content clearfix">
+                <h3>FIND PAGES WITH...</h3>
+
+                <div class="input-container">
+                    <label>All these words:</label>
+                    <input type="text" ng-model="query.allWords" placeholder="Important words"/>
+                </div>
+                <div class="input-container">
+                    <label>This exact word or phrase:</label>
+                    <input type="text" ng-model="query.exactPhrase" placeholder='Exact words'/>
+                </div>
+                <div class="input-container">
+                    <label>Any of these words:</label>
+                    <input type="text" ng-model="query.anyWords" placeholder="Any of these words"/>
+                </div>
+                <div class="input-container">
+                    <label>None of these words:</label>
+                    <input type="text" ng-model="query.noneWords" placeholder="None of these words"/>
+                </div>
+            </div>
+            <div class="builder-content clearfix">
+                <h3>NARROW RESULTS BY...</h3>
+
+                <div class="input-container">
+                    <label>Key value pairs:</label>
+
+                    <div class="key-value-pair clearfix" ng-repeat="pair in query.keyValuePairs">
+                        <input type="text" ng-model="pair.key" placeholder="Enter value"/>
+                        <div class="text-divider">with</div>
+                        <input type="text" ng-model="pair.value" placeholder="Enter value"/>
+
+                        <div class="controls">
+                            <a ng-hide="$first" ng-click="removeKeyValuePair($event, pair.id)">
+                                <span class="icon-minus"></span>
+                            </a>
+                            <a ng-show="$last" ng-click="addKeyValuePair($event)">
+                                <span class="icon-plus"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="builder-footer">
+            <a ng-click="searchRedirect()" class="search-btn"><span class="icon-search-3"></span></a>
+            <a ng-click="cancel()" class="cancel-btn">Cancel</a>
+        </div>
+    </div>
+</div>
+<toaster-container></toaster-container>

@@ -1,0 +1,202 @@
+/*** central column on page ***/
+		@font-face {
+			font-family: 'Quicksand-Light';
+			src: url('../fonts/quicksand_light-webfont.eot');
+			src: url('../fonts/quicksand_light-webfont.eot?#iefix') format('embedded-opentype'),
+				 url('../fonts/quicksand_light-webfont.woff') format('woff'),
+				 url('../fonts/quicksand_light-webfont.ttf') format('truetype'),
+				 url('../fonts/quicksand_light-webfont.svg#quicksandlight') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Quicksand-Book';
+			src: url('../fonts/quicksand_book-webfont.eot');
+			src: url('../fonts/quicksand_book-webfont.eot?#iefix') format('embedded-opentype'),
+				 url('../fonts/quicksand_book-webfont.woff') format('woff'),
+				 url('../fonts/quicksand_book-webfont.ttf') format('truetype'),
+				 url('../fonts/quicksand_book-webfont.svg#quicksandbook') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Quicksand-Bold';
+			src: url('../fonts/quicksand_bold-webfont.eot');
+			src: url('../fonts/quicksand_bold-webfont.eot?#iefix') format('embedded-opentype'),
+				 url('../fonts/quicksand_bold-webfont.woff') format('woff'),
+				 url('../fonts/quicksand_bold-webfont.ttf') format('truetype'),
+				 url('../fonts/quicksand_bold-webfont.svg#quicksandbold') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+		
+        body {
+			font-family: 'Quicksand-Book';
+			font-size: 14px;
+			line-height: 18px;
+			overflow: hidden;
+			overflow-y: scroll;
+			background: #F6F5F2;
+		}
+        div#divContainer
+        {
+			width: 100%;
+			max-width:1260px;
+			padding: 30px;
+			box-sizing:border-box;
+			background: #fff;
+			border: 1px solid #d5d5d5;
+			margin:0 auto;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			-khtml-border-radius: 5px;
+        }
+		input {
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			-khtml-border-radius: 3px;
+		    border: 1px solid #d5d5d5;
+			background:#f5f5f5;
+			outline:none;
+			padding:10px;
+			box-sizing:border-box;
+			min-width:250px;
+			font-family: 'Quicksand-Book';
+			font-size: 14px;
+			color:#666;
+		}
+		input:focus { background:#fff; transition:all 200ms; }
+		input:hover { border:1px solid #bebebe } 
+
+        h2 {color:#3399cc; font-size:20px; margin:0 0 20px 0; font-family: 'Quicksand-Light'; }
+		
+		tr td { padding:0 20px 10px 0; font-family: 'Quicksand-Bold'; }
+ 		
+		select { padding:10px; }
+
+        table.formatHTML5 {
+            width: 100%;
+            border-collapse:collapse;
+			 border: 1px solid #ccc;
+            text-align:left;
+            color: #606060;
+        }
+
+        /*** table's thead section, head row style ***/
+        table.formatHTML5 thead  {
+             font-family: 'Quicksand-Bold' !important;
+                                font-size:13px !important;
+        }
+		
+        table.formatHTML5 thead tr td  {
+            background-color: transparent;
+            vertical-align:middle;
+            padding: 5px;
+        }
+
+        /*** table's thead section, coulmns header style ***/
+        table.formatHTML5 thead tr th
+        {
+            padding: 0.5em;
+            /* add gradient */
+            background-color: #808080;
+            background: -webkit-gradient(linear, left top, left bottom, from(#606060), to(#909090));
+            background: -moz-linear-gradient(top, #606060, #909090);
+            color: #dadada;
+        }
+
+        /*** table's tbody section, odd rows style ***/
+        table.formatHTML5 tbody tr:nth-child(odd) {
+           background-color: #fafafa;
+        }
+
+        /*** table's tbody section, even rows style ***/
+        table.formatHTML5 tbody tr:nth-child(even) {
+            background-color: #efefef;
+        }
+
+       /*** table's tbody section, last row style ***/
+        table.formatHTML5 tbody tr:last-child { }
+
+        /*** table's tbody section, separator row pseudo-class ***/
+        table.formatHTML5 tbody tr.separator {
+            /* add gradient */
+            background-color: #808080;
+            background: -webkit-gradient(linear, left top, left bottom, from(#606060), to(#909090));
+            background: -moz-linear-gradient(top, #606060, #909090);
+            color: #dadada;
+        }
+
+        /*** table's td element, all section ***/
+        table.formatHTML5 td {
+           vertical-align:middle;
+           padding: 5px;
+		   font-family: 'Quicksand-Book';
+        }
+
+        /*** table's tfoot section ***/
+        table.formatHTML5 tfoot{
+            text-align:center;
+            color:#303030;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+        }
+		
+		.btn {
+			width: auto;
+			padding: 15px 30px 17px;
+			box-sizing:border-box;
+			background: #3dcefc;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+			border: none;
+			color: #fff !important;
+			font-size: 16px;
+			font-family: 'Quicksand-Bold';
+			cursor: pointer;
+			outline: none;
+			text-decoration: none;
+			text-shadow: 1px 1px 1px rgba(0,0,0, .15);
+		}
+			.btn:hover {
+					background-image: -ms-linear-gradient(bottom, #0db5ea 0%, #3dcefc 100%);
+					background-image: -moz-linear-gradient(bottom, #0db5ea 0%, #3dcefc 100%);
+					background-image: -o-linear-gradient(bottom, #0db5ea 0%, #3dcefc 100%);
+					background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #0db5ea), color-stop(1, #3dcefc));
+					background-image: -webkit-linear-gradient(bottom, #0db5ea 0%, #3dcefc 100%);
+					background-image: linear-gradient(to top, #0db5ea 0%, #3dcefc 100%);
+					color: #fff;
+					text-shadow: 1px 1px 1px rgba(0,0,0, .25);
+					-webkit-box-shadow: 0 2px 2px rgba(0,0,0, .15);
+					-moz-box-shadow: 0 2px 2px rgba(0,0,0, .15);
+					box-shadow: 0 2px 2px rgba(0,0,0, .15);
+				    outline: none;
+					border:none;
+					}
+		    .btn:active {
+					-webkit-box-shadow: inset 0 1px 5px rgba(0,0,0, .25);
+					-moz-box-shadow: inset 0 1px 5px rgba(0,0,0, .25);
+					box-shadow: inset 0 1px 5px rgba(0,0,0, .25);
+					outline: none;
+					border:none;
+				}
+		    .btn:focus { background: #3dcefc; }
+		
+		select {
+			-webkit-appearance: none;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+			padding: 10px;
+			background: url(../images/dd_arrow.png) no-repeat right #f5f5f5;
+			width: 150px;
+			height: 40px;
+			font-size: 14px;
+			border: 1px solid #d5d5d5;
+			min-width:200px;
+			}
+	   select:hover { border:1px solid #bebebe; background: }
+	   
+	   select:focus { background: url(../images/dd_arrow.png) no-repeat right #fff; transition:all 200ms; outline:none; }

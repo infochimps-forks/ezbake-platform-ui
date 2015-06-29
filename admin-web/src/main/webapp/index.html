@@ -1,0 +1,67 @@
+<!doctype html>
+<!--   Copyright (C) 2013-2015 Computer Sciences Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. -->
+
+
+<html lang="en" ng-app="admin">
+<head>
+  <script src="components/platform/platform.js" type="text/javascript"></script>
+  <link rel="import" href="components/classification-banner/classification-banner.html">
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/toaster.css"/>
+  <link rel="stylesheet" href="./css/app.css" />
+  <script src="./lib/jquery-1.10.2.min.js"></script>
+  <meta charset="utf-8">
+  <title>Application Engine Admin</title>
+</head>
+<body ng-controller="AdminCtrl" data-ng-init="isAdmin()">
+	<classification-banner></classification-banner>
+	<!-- is authorized to see this page? -->
+	<div ng-show="isAdmin">
+ 	    <div class="app-registration-overlay">
+	        <div class="header-wrapper">
+	            <div class="header animated-fast slideInDown">
+	                <div class="logo animated fadeIn">
+	                    <img src="images/engine-logo.svg" alt="App Engine" class="engine-logo">
+	                </div>
+	                <h1 class="inline-middle">Application Admin</h1>
+	            </div>
+	        </div>
+ 	        <div class="app-registration-container">
+	            <div ng-view></div>
+	        </div>
+ 		</div>
+		  <script src="lib/angular/angular.min.js"></script>
+	      <script src="lib/angular/angular-route.min.js"></script>
+	      <script src="lib/angular/angular-resource.min.js"></script>
+	      <script src="lib/angular/angular-cookies.min.js"></script>
+	      <script src="lib/angular/angular-mocks.min.js"></script>
+	      <script src="lib/angular/angular-animate.min.js"></script>
+          <script src="lib/toaster.js"></script>
+          
+          <!-- build:js js/admin-web.min.js -->
+	      <script src="js/app.js"></script>
+	      <script src="js/FakeREST.js"></script>
+	      <script src="js/services.js"></script>
+	      <script src="js/controllers.js"></script>
+	      <script src="js/filters.js"></script>
+	      <script src="js/directives.js"></script>
+	      <!-- endbuild -->
+	      <script src="lib/ui-bootstrap-tpls-0.10.0.min.js"></script>
+	</div>
+	<div ng-show="!isAdmin">
+		<h1>403 - Unauthorized User</h1>
+	</div>
+</body>
+</html>

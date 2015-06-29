@@ -1,0 +1,27 @@
+Application:
+  name: Logging
+  datasets: []
+  security_id: 8463594552061505577
+  auths: []
+  Services:
+    -
+      type: WebApp
+      language: NodeJs
+      service_name: LoggingWeb
+      resources:
+        cpu: small
+        mem: small
+        disk: small
+      scaling:
+         number_of_instances: 1
+      artifact_info:
+        bin:
+        config: []
+      external_web_url: logs
+      internal_web_url: logs
+      upload_file_size: 10
+      timeout: 120
+      timeout_retries: 5
+      sticky_session: false
+      disable_chunked_transfer_encoding: true
+      disable_websocket_support: true

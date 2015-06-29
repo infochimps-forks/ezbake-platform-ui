@@ -1,0 +1,29 @@
+<table class="wh-table table">
+   <thead>
+      <tr>
+         <th class="select">
+            <a href="" ng-click="selectAll()" title="Selects all entries in the table">All</a> | <a href="" ng-click="deselectAll()" title="Deselects all entries in the table">None</a>
+         </th>
+         <th class="uri">URI</th>
+         <th class="timestamp">Timestamp</th>
+         <th class="visibility">Formal Visibility</th>
+         <th class="visibility">Community Visibility</th>
+         <th class="usp">USP</th>
+         <th class="exempt">Exemption</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr ng-repeat="entry in ssrs">
+         <td class="select">
+            <input type="checkbox" ng-model="entry.isSelected">
+         </td>
+         <td class="uri">{{entry.uri}}</td>
+         <td class="timestamp">{{entry.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+         <td class="visibility">{{entry.formalVisibility}}</td>
+         <td class="visibility">{{entry.extCommunityVisibility}}</td>
+         <td class="usp">{{entry.usp}}</td>
+         <td class="exempt">{{entry.exemption}}</td>
+      </tr>
+   </tbody>
+</table>
+<button type="button" class="btn btn-default btn-sm" ng-click="confirmPurge()"  ng-disabled="!anySelected()" title="Purges the selected items from data repositories">Purge</button>

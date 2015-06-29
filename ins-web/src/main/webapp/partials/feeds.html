@@ -1,0 +1,19 @@
+<div class="content-wrapper">
+    <h1 class="pad-b20">Current Registered Data Feeds</h1>
+    <ul>
+        <li ng-repeat="feed in feeds" class="list-inline">
+            <div class="jumbotron">
+                <h2>{{feed.feedName}}</h2>
+                <div class="mar-t10">{{feed.description}}</div>
+                <div class="mar-t10 bold">Topic Names, Description, and corresponding thrift definition:</div>
+                <ul class="mar-t10">
+                    <dl ng-repeat="topic in feed.broadcastTopics" class="dl-horizontal">
+                        <dt>{{topic.name}}</dt>
+                        <dd><small>{{topic.descripition}} <a href="{{topic.location}}">Thrift Definition</a></small></dd>
+                    </dl>
+                </ul>
+            </div>
+    
+        </li>
+    </ul>
+</div>

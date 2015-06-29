@@ -1,0 +1,20 @@
+Application:
+ name: globalsearch
+ Services:
+  -
+     type: WebApp
+     web_app_name: ssrIndexing
+     scaling:
+       number_of_instances: 1
+     artifact_info:
+       resources:
+         cpu: small
+         mem: small
+         disk: small
+       language: Java
+       bin: ROOT.war
+     external_web_url: globalsearch
+     upload_file_size: 5
+     timeout: 60
+     timeout_retries: 5
+     sticky_session: false

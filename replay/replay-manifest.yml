@@ -1,0 +1,22 @@
+Application:
+  name: replay
+  datasets: []
+  security_id: 5605451161237863733
+  auths: []
+
+  Services: 
+    -
+      type: WebApp
+      web_app_name: replayweb
+      timeout: 60
+      timeout_retries: 3
+      artifact_info:
+        resources:
+          cpu: small 
+          mem: small
+          disk: small 
+        language: Java 
+        bin: ROOT.war
+        config: [] 
+        auths: []
+      external_web_url: warehouse-replay

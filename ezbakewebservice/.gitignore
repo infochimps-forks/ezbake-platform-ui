@@ -1,0 +1,41 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans 
+nbactions.xml
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+# ???
+dependency-reduced-pom.xml
+
+# Ant Build Artifacts
+build/
+jars/
+
+sample-log.txt
+
+*.gz
+
+# Bulk load output txt files
+bulkLoadResults*.txt
+indexCreationResults*.txt
+
+# backup files for setupEzConfigurationWithSSL.sh
+*.bak
+
+# Node.js
+node_modules/
+npm-debug.log

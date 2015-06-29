@@ -1,0 +1,16 @@
+<div class="tri-up"></div>
+<div class="saved-searches-container">
+    <div class="header">Saved Searches</div>
+    <div class="saved-result-wrapper" ng-repeat="result in savedSearch.results">
+        <div class="entry" ng-class="{'updated': result.hasUpdates}">
+            <div class="name clickable" ng-click="performSavedSearch(result)">{{result.name}}</div>
+            <div class="term clickable" ng-click="performSavedSearch(result)">{{result.searchTerm}}</div>
+            <div class="date" ng-show="result.hasUpdates">results updated {{result.updateDate | date: "EEE MMM dd
+                yyyy"}}
+            </div>
+            <div class="button update-btn" ng-click="updateSavedSearch(result)"><span class="icon-pencil"></span></div>
+            <div class="button delete-btn" ng-click="deleteSavedSearch(result)"><span class="icon-cross"></span></div>
+        </div>
+    </div>
+    <div class="save-btn" ng-click="addSavedSearch()">SAVE SEARCH</div>
+</div>

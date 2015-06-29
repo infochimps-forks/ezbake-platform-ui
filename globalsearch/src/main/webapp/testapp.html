@@ -1,0 +1,90 @@
+<html>
+<head>
+    <script type="text/javascript">
+        window.chloe = (function () {
+
+            var addEvent = (function () {
+                if (document.addEventListener) {
+                    return function (el, type, fn) {
+                        if (el && el.nodeName || el === window) {
+                            el.addEventListener(type, fn, false);
+                        } else if (el && el.length) {
+                            for (var i = 0; i < el.length; i++) {
+                                addEvent(el[i], type, fn);
+                            }
+                        }
+                    };
+                } else {
+                    return function (el, type, fn) {
+                        if (el && el.nodeName || el === window) {
+                            el.attachEvent('on' + type, function () {
+                                return fn.call(el, window.event);
+                            });
+                        } else if (el && el.length) {
+                            for (var i = 0; i < el.length; i++) {
+                                addEvent(el[i], type, fn);
+                            }
+                        }
+                    };
+                }
+            })();
+
+            var chloe = {
+                init: function (app, channel, chloeUri, callback) {
+                    var ws = new WebSocket(chloeUri);
+                    ws.onopen = function () {
+                        if (channel) {
+                            ws.send(JSON.stringify({app: app, channel: channel}));
+                        }
+                    };
+                    ws.onmessage = function (message) {
+                        message = JSON.parse(message.data);
+                        if (callback) {
+                            callback(message);
+                        }
+                    };
+                    // Temporary method of sharing data between apps until we can fix websockets on ide20
+                    var handle_storage = function (e) {
+                        if (!e) {
+                            e = window.event;
+                        }
+                        if (localStorage.getItem(app + channel)) {
+                            message = JSON.parse(localStorage.getItem(app + channel));
+                            if (callback) {
+                                callback(message);
+                            }
+                            localStorage[app + channel] = null;
+                        }
+                    };
+                    addEvent(window, 'storage', handle_storage);
+                }
+            };
+
+            return chloe;
+        }());
+
+    </script>
+    <script type="text/javascript">
+        function getQueryObj(uri) {
+            var result = {};
+            var keyValuePairs = uri.slice(1).split('&');
+
+            keyValuePairs.forEach(function (keyValuePair) {
+                keyValuePair = keyValuePair.split('=');
+                result[keyValuePair[0]] = keyValuePair[1] || '';
+            });
+
+            return result;
+        }
+
+        var queryObj = getQueryObj(location.search);
+        chloe.init(decodeURIComponent(queryObj["app"]), decodeURIComponent(queryObj["channel"]), decodeURIComponent(queryObj["chloeUri"]), function (msg) {
+            document.getElementById("container").innerHTML = JSON.stringify(msg);
+        });
+    </script>
+</head>
+<body>
+<div id="container">
+</div>
+</body>
+</html>

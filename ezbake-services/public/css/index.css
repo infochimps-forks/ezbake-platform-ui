@@ -1,0 +1,228 @@
+/*
+* Copyright (C) 2013-2014 Computer Sciences Corporation Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+/*
+    public/css/index.css handles styling on the index view.
+*/
+
+body {
+    ::-webkit-input-placeholder {
+	   text-transform: capitalize;
+	}
+
+	:-moz-placeholder {
+	   text-transform: capitalize;
+	}
+
+	::-moz-placeholder {
+	   text-transform: capitalize;
+	}
+
+	:-ms-input-placeholder {
+	   text-transform: capitalize;
+	}
+}
+
+classification-banner::shadow #classification-banner-top span {
+	height: 16px;
+}
+
+core-toolbar {
+	position: fixed;
+	top: 16px;
+	z-index: 2;
+	width: 100%;
+	height: 50px;
+	font-family: 'Opensans-Light';
+    color: #fff;
+    background: #039197;
+}
+core-toolbar .core-home {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	padding: 0 20px;
+	color: #fff;
+	transition: all linear .15s;
+}
+core-toolbar .core-home:hover {
+	opacity: .5;
+	transition: all linear .15s;
+}
+core-toolbar .core-home core-logo img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 130px;
+	height: auto !important;
+	margin: 5px 0 5px 20px !important;
+}
+core-toolbar .core-home core-logo h1 {
+	font-size: 18px;
+	padding: 15px 0 10px 135px;
+	display: inline-block;
+}
+core-toolbar .core-home core-logo h1 span {
+	font-size: 14px;
+	font-family: 'Opensans-Semibold';
+	text-transform: uppercase;
+	color: #00454b;
+	padding: 0 0 0 5px;
+}
+
+paper-menu-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	padding: 12px 20px;
+}
+paper-menu-button paper-item {
+    color: #333333;
+    font-size: 0.7em;
+}
+
+paper-tabs {
+    position: fixed;
+    top: 16px;
+    z-index: 3;
+    left: 294px;
+    right: 64px;
+    width: auto;
+    height: 50px;
+    font-family: 'Opensans-Light';
+    color: #fff;
+}
+paper-tabs paper-tab {
+	padding: 12px;
+	border-right: 1px solid #007a8c;
+	transition: all linear .15s;
+}
+paper-tabs paper-tab:hover {
+	background: #006b71;
+	color: rgba(255,255,255,1);
+	cursor: pointer;
+	transition: all linear .15s;
+}
+paper-tabs paper-tab:first-child {
+	border-left: 1px solid #007a8c;
+}
+paper-tabs paper-tab:hover .tab-content {
+	opacity: 1;
+}
+
+core-pages {
+	background: #f5f5f5;
+	padding: 20px;
+	margin: 66px 0 0 0;
+}
+core-pages .pages-section {
+	font-family: 'Opensans-Light';
+	background: #fff;
+	border: 1px solid #d5d5d5;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+core-pages .pages-section:first-child {
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+core-pages .pages-section:last-child {
+	margin: 0;
+}
+core-pages .pages-section h2 {
+	padding: 4px 0 5px 0;
+	display: inline-block;
+}
+core-pages .pages-section h3 {
+	font-family: 'Opensans-Semibold';
+	font-size: 14px;
+	text-transform: uppercase;
+	color: #008c9e;
+	padding: 7px 10px 10px 10px;
+}
+core-pages .pages-section paper-button {
+	background: #948c75;
+	font-family: 'Opensans-Semibold';
+	font-size: 11px;
+	padding: 2px 10px 5px 10px;
+	margin-left: 10px;
+	float: right;
+	color: rgba(255,255,255,.5);
+	transition: all linear .15s;
+}
+core-pages .pages-section paper-button:hover {
+	background: #7a6a53;
+	color: #fff;
+	transition: all linear .15s;
+}
+core-pages .pages-section .serviceMethod {
+	padding: 10px;
+	margin: 0;
+	border: none;
+	font-size: 14px;
+}
+core-pages .pages-section .serviceMethod h4 {
+	border-top: 1px solid #d5d5d5;
+	padding: 20px 0 10px 0;
+	font-size: 14px;
+	color: #858585;
+}
+core-pages .pages-section .serviceMethod p {
+	width: 100%;
+	padding: 10px 0 20px 0;
+	font-size: 14px;
+	line-height: 18px;
+	display: inline-block;
+}
+core-pages .pages-section .serviceMethod .core-input {
+	width: 100%;
+	height: 60px;
+	margin: 0;
+	/*
+	border: 1px solid #d5d5d5;
+	padding: 4px 15px 10px 15px;
+	margin: 0 0 20px 0;
+	font-size: 12px;
+	float: left;
+	*/
+}
+core-pages .pages-section .serviceMethod .core-checkbox {
+	padding: 0 10px 5px 0;
+	display: inline-block;
+}
+core-pages .pages-section .serviceMethod paper-button[raisedButton].colored {
+	background: #948c75;
+	font-family: 'Opensans-Semibold';
+	font-size: 11px;
+	padding: 2px 10px 5px 10px;
+	margin-top: 10px;
+	float: right;
+	color: rgba(255,255,255,.5);
+	transition: all linear .15s;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+core-pages .pages-section .serviceMethod paper-button[raisedButton].colored:hover {
+	background: #7a6a53;
+	color: #fff;
+	transition: all linear .15s;
+}
+
+core-copyright {
+	display: block;
+	text-align: center;
+	background: #f5f5f5;
+}
+core-copyright p {
+	padding: 0 20px 25px 20px;
+	font-family: 'Opensans-Light';
+	font-size: 12px;
+	color: #858585;
+}

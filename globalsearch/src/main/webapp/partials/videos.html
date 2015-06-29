@@ -1,0 +1,44 @@
+<div id="videoResults">
+    <div class="video-results-list-all">
+        <div ng-repeat="video in videoResults" draggable>
+            <div class="video-list-result">
+                <img src="{{video.media.thumbnail.url}}" border="0">
+
+                <div class="video-list-details">
+                    <div class="list-title">
+                        <a href="#">{{video.title}}</a>
+                    </div>
+                    <div class="list-source">
+                        <span>{{video.source}}</span> - <span>{{video.upload_date}}</span> - {{video.views}}</span>
+                        </span></div>
+                    <div class="list-description">
+                        <p>{{video.description | words:40}}</p>
+                    </div>
+                    <!-- <rating value="rate" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating> -->
+                    <div class="list-controls">
+	                     <span class="list-controls-options">
+	                        <a class="list-controls-link" href="#"><span class="media-icon icon-export"></span>
+                                Share</a>
+	                    </span>
+	                    <span class="list-controls-options">
+	                        <a class="list-controls-link" href="#"><span class="media-icon icon-chat"></span>
+                                Comment</a>
+	                    </span>
+	                    <span class="list-controls-options">
+	                        <a class="list-controls-link" href="#"><span class="media-icon icon-download-2"></span>
+                                Download</a>
+	                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="list-divider clearfix">&nbsp;</div>
+        </div>
+        <div ng-show="videoResults && videoResults.length > 0" class="show-more-results clearfix">
+            <a href="" target="_blank" class="show-more-results-btn"
+               ng-click="resultObject.video_page = resultObject.video_page + 1; search('',true)">Show More Results</a>
+        </div>
+        <div ng-show="videoResults == undefined || videoResults.length == 0">
+            No video results to display.
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<!doctype html>
+<head></head>
+<div class="main-navigation-wrapper">
+    <div class="main-navigation animated-fast slideInDown">
+        <div class="logo animated fadeIn">
+            <a href="#/myapps"><img src="./images/engine-logo.svg" alt="App Engine"></a>
+        </div>
+        <div class="home">
+            <a href="#/home"><span aria-hidden="true" class="icon-house"></span></a>
+        </div>
+    </div>
+</div>
+<div xmlns="http://www.w3.org/1999/html" id="app-registration-container">
+    <div>
+        <div class="registration-progress-container">
+            <div class="registration-progress">
+                <ul class="registration-progress-list">
+                    <h3>Registration Progress</h3>
+                    <li ng-repeat="page in wizardPages | limitTo:1-wizardPages.length"><span ng-class="page.iconClass"></span>{{page.name}}
+                        <span ng-show="page.complete" class="icon-step-complete"></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="registration-slider-container">
+            <div class="registration-wrapper">
+
+                <form name="appForm" class="registration_form">
+                    <accordion close-others="true">
+                        <accordion-group ng-repeat="page in wizardPages" is-open="page.currentSection" is-disabled="!page.enabled" ng-class="{'panel-open':page.currentSection,'panel-closed':!page.currentSection,'panel-active':page.enabled, 'panel-inactive':!page.enabled}">
+                            <accordion-heading>
+                                <div class="centered">
+                                    <div class="mar-t20 mar-b20">
+                                        <h1>{{page.header}}</h1>
+                                        <div ng-show="showPagesQuestion(page)">
+                                            <p class="radio">{{page.question}}</p>
+                                            <button class="btn radio" type="button" ng-disabled="!page.enabled" ng-model="page.answer" btn-radio="true"  ng-click="page.currentItem={}" >Yes</button>
+                                            <button class="btn radio" type="button" ng-disabled="!page.enabled" ng-model="page.answer" btn-radio="false" ng-click="continueRegistration(page, 'no')">No</button>
+                                        </div>
+                                        <ul class="no-disc" ng-repeat="(key, item) in page.collection">
+                                            <div class="data-item" ng-click="page.currentItem=item">
+                                                <li class="relative">
+                                                    <div class="relative">
+                                                        <div class="item-container no-margin">{{page.getItemName(item)}}</div>
+                                                        <button type="button" class="remove" title="Remove" alt="Remove" ng-click="page.isHash ? removeCurrentHashItem(page.collection, key) : removeCurrentItem(page, $index, $event)"><span aria-hidden="true" class="icon-remove"></span></button>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <div class="centered" ng-show="showAddAnother(page)">
+                                            <h2>{{page.addAnotherQuestion}}</h2>
+                                            <button class="btn radio" type="button" btn-radio="'Yes'" ng-model="addAnotherRadio" ng-click="page.currentItem={}" uncheckable>Yes</button>
+                                            <button class="btn radio" type="button" btn-radio="'No'" ng-model="addAnotherRadio" ng-click="continueRegistration(page, 'no')" uncheckable>No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </accordion-heading>
+
+                            <div class="pagetemplate" ng-include="page.template" ></div>
+                        </accordion-group>
+                    </accordion>
+                </form>
+                <div id="dialog">
+                </div>
+                <div class="centered">
+                    <div class="g-app-wrapper">
+                        <button type="submit" class="btn large-btn save-app" ng-click="saveApplication()" ng-disabled="disableSaveApplication">Save Application</button>
+                        <button type="submit" class="cancel-app" ng-confirm-click="Are you sure you want to cancel registration?" callback-yes="cancelRegistration()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+</div>
+<toaster-container toaster-options="{'time-out': 5000, 'close-button':true}"></toaster-container>

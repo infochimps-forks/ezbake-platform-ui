@@ -1,0 +1,70 @@
+.query-builder {
+    padding: 25px;
+}
+
+.query-builder h1 {
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    background: #fff;
+    padding: 0 25px 0 0;
+    display: inline-block;
+}
+
+.query-builder h2 {
+    display: inline-block;
+    color: #54add7;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.query-builder hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #42a5d3;
+    margin: 5px 0 25px 0;
+    padding: 0;
+}
+
+.query-builder h3 {
+    color: #ccc;
+    font-size: 8pt;
+    padding: 0 0 10px 0;
+}
+
+.query-builder label {
+    display: inline-block;
+    color: black;
+    font-size: 8pt;
+    font-weight: bold;
+    width: 180px;
+}
+
+.query-builder input {
+    display: inline-block;
+    width: 499px;
+}
+
+.query-builder .key-value-pair {
+    display: block;
+    margin-left: 185px;
+}
+
+.query-builder .key-value-pair label {
+    width: auto;
+}
+
+.query-builder .key-value-pair input {
+    width: 231px;
+    margin-top: 10px;
+}
+
+.query-builder .icon-plus, .query-builder .icon-minus {
+    cursor: pointer;
+    font-size: 8pt;
+}
+
+.query-builder #footer {
+    margin: 25px 0 0 0;
+}

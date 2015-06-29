@@ -1,0 +1,13 @@
+<div class="comment-wrapper">
+    <script type="text/ng-template" id="delete-confirm-modal.html"></script>
+    <div class="modal-header">
+        <h4>Delete</h4>
+    </div>
+    <div class="modal-body">
+        Are you sure you want to delete the selected items?
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()" ng-disabled="inProgress">No</button>
+        <button class="btn btn-primary" ng-click="triggerDelete()" ng-disabled="inProgress">Yes</button>
+    </div>
+</div>

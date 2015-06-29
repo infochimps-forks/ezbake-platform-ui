@@ -1,0 +1,18 @@
+Application:
+ Services:
+  -
+     type: WebApp
+     web_app_name: chloe
+     scaling:
+       number_of_instances: 1
+     artifact_info:
+       resources:
+         cpu: small
+         mem: small
+         disk: small
+       language: NodeJs
+     external_web_url: chloe
+     upload_file_size: 5
+     timeout: 60
+     timeout_retries: 5
+     sticky_session: false

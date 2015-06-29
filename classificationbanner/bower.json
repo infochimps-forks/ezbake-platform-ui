@@ -1,0 +1,28 @@
+{
+  "name": "classification-banner",
+  "version": "0.0.1",
+  "authors": [
+    "Jerry Conner <jconner@42six.com>"
+  ],
+  "description": "Classification banner",
+  "keywords": [
+    "classification",
+    "banner",
+    "web-components",
+    "polymer"
+  ],
+  "main": "classification-banner.html",
+  "license": "CSC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~0.4.2",
+    "polymer-test-tools": "Polymer/polymer-test-tools#>=0.4.0 <1.0.0"
+  }
+}

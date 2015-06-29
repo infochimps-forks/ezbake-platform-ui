@@ -1,0 +1,30 @@
+<div id="imageResults" infinite-scroll content-height-resize ng-controller="WebSearchCtrl">
+    <div ng-show="imageResults == undefined || imageResults.length == 0" style="margin:25px;">
+        No image results to display.
+    </div>
+    <div id="gallery">
+        <div ng-show="imageResults && imageResults.length > 0">
+            <div class="results-count">
+                Displaying {{imageResults.length}} of about {{searchDetails.image_pages}} results
+                ({{searchDetails.time}} seconds)
+            </div>
+            <div class="image-holder" ng-repeat="image in imageResults" draggable>
+                <a href="{{image.url}}" target="_blank()" class="image-link">
+                    <img src="{{image.thumbnail.url}}" data-width="{{image.thumbnail.width}}"
+                         data-height="{{image.thumbnail.height}}" tooltip-placement="bottom"
+                         tooltip-html-unsafe="<p>{{image.filename}}</p><p>{{image.thumbnail.width}} x {{image.thumbnail.height}}</p>"/>
+                    <!-- <img src="{{image.thumbnail.url}}" data-width="{{image.thumbnail.width}}" data-height="{{image.thumbnail.height}}"/> -->
+                </a>
+
+                <div class="information">
+                    <h2>{{image.filename}}</h2>
+
+                    <p class="dimensions">{{image.thumbnail.width}} x {{image.thumbnail.height}} - Test Image
+                        Description: Hello world... </p>
+
+                    <p class="similar"><a href="#">Similar Images</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

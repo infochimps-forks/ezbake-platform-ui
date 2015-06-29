@@ -1,0 +1,62 @@
+<div class="results-return" ng-click="select(result)"> <!-- clearfix -->
+    <div class="results-info">
+        <div class="icon-checkmark-container"><span class="icon-checkmark"></span></div>
+        <div ng-show="!result.webApplicationLinks || result.webApplicationLinks.length == 0">
+            <span class="results-visibility">{{result.portionMarking}}</span>
+            <a class="results-title" href="" target="_blank" ng-click="openWithViewer(result)">{{result.title}}</a>
+
+            <div class="results-details clearfix">
+                <a class="results-source" href="" target="_blank" ng-click="openWithViewer(result)">Viewer</a>
+
+                <p class="results-date">{{result.updated}}</p>
+
+                <p class="id">{{result.id}}</p>
+            </div>
+            <p class="results-description">{{result.description | characters:500}}</p>
+        </div>
+        <div ng-show="result.webApplicationLinks.length == 1">
+            <span class="results-visibility">{{result.portionMarking}}</span>
+            <a class="results-title"
+               ng-click="openWithApp(result, result.webApplicationLinks[0].webUrl, 'Opened result with app', {title: result.title})"
+               target="_blank">{{result.title}}</a>
+
+            <div class="results-details clearfix">
+                <a class="results-source" href="{{result.webApplicationLinks[0].webUrl}}" target="_blank">{{result.links[0]}}</a>
+
+                <p class="results-date">{{result.updated}}</p>
+
+                <p class="id">{{result.id}}</p>
+            </div>
+            <p class="results-description">{{result.description | characters:500}}</p>
+        </div>
+        <div ng-show="result.webApplicationLinks.length >= 2" ng-controller="ModalCtrl">
+            <span class="results-visibility">{{result.portionMarking}}</span>
+            <a class="results-title" href="" ng-click="currentResult.value = result; open()">{{result.title}}</a>
+
+            <div class="results-details clearfix">
+                <p class="results-date">{{result.updated}}</p>
+
+                <p class="id">{{result.id}}</p>
+            </div>
+            <p class="results-description">{{result.description | characters:500}}</p>
+        </div>
+    </div>
+    <div class="results-open-with clearfix">
+        <div class="open-btn">
+            <span class="down-triangle icon-arrow-right-2"></span>
+            <a class="results-source" href="">Open With</a>
+        </div>
+        <div class="drop-down">
+            <ul>
+                <li>
+                    <a ng-click="openWithApp(result, result.viewerUrl, 'Opened result with Viewer', {})" href=""
+                       target="_blank">Viewer</a>
+                </li>
+                <li ng-repeat="link in result.webApplicationLinks">
+                    <a ng-click="openWithApp(result, link.webUrl, 'Opened result with app', {appName: link.appName })"
+                       href="" target="_blank">{{link.appName}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

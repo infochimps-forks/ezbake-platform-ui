@@ -1,0 +1,8 @@
+a.refresh-toggle,a.remove-entry {
+    cursor: pointer;
+    color: blue;
+}
+
+a:hover,a.hover {
+    text-decoration: underline;
+}

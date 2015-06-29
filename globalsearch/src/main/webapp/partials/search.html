@@ -1,0 +1,61 @@
+<div id="mainPanel" ng-init="initializeController()">
+    <div id="contentWrapper" tabify toggle-saved-search>
+        <div id="navBar" resize-nav-bar>
+            <div id="main-tabs">
+                <a href="#"><img src="img/logo.png"/></a>
+
+                <div id="topSearchDiv">
+                    <div class="input-container">
+                        <input type="text" class="search-form" name="searchText" id="searchBox"
+                               ng-model="searchText" global-search-enter="searchRedirect()">
+                        <a ng-click="searchRedirect()" class="search-btn">
+                            <span class="icon-search-3"></span>
+                        </a>
+                    </div>
+                    <div id="savedSearches">
+                        <div class="updates" ng-show="savedSearch.updateCount">{{savedSearch.updateCount}}</div>
+                        <a id="showSavedSearch" class="saved-search-btn">
+                            <span class="icon-arrow-down"></span>
+                        </a>
+
+                        <div id="savedSearchContainer" ng-show="savedSearch.show">
+                            <div ng-include src="'partials/saved-search.html'"></div>
+                        </div>
+                    </div>
+                    <a href="#/advanced-search" class="advanced-search-btn">
+                        <span class="icon-cog"></span>
+                    </a>
+                </div>
+                <div id="links" class="nav-tabs">
+                    <ul class="clearfix">
+                        <li id="web-tab-link"><a class="nav-link active" href="#tabs-1">Web</a></li>
+                        <!--
+                        <li id="image-tab-link"><a class="nav-link" href="#tabs-2">Image</a></li>
+                        <li id="video-tab-link"><a class="nav-link" href="#tabs-3">Video</a></li>
+                        -->
+                        <li id="map-tab-link"><a class="nav-link" ng-click="showMap()" href="#tabs-4">Map</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="tab-bodies">
+            <div id="tabs-1">
+                <div id="web-tab" ng-include src="'partials/web.html'"></div>
+            </div>
+            <!--
+            <div id="tabs-2">
+                <div id="image-tab" ng-include src="'partials/images.html'"></div>
+            </div>
+            <div id="tabs-3">
+                <div id="video-tab" ng-include src="'partials/videos.html'"></div>
+            </div>
+            -->
+            <div id="tabs-4">
+                <div id="map-tab" ng-include src="'partials/map.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="leftPanel" ng-include src="'partials/sidebar.html'"></div>
+<div chloe></div>
+<toaster-container></toaster-container>

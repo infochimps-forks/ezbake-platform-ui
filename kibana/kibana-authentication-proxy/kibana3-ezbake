@@ -1,0 +1,66 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          kibana-authentication-proxy
+# Required-Start:    networking
+# Required-Stop:     networking
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Kibana Authentication and EzBake integration proxy
+# Description:       Hosts a custom version of kibana3 and elasticsearch
+#                    behind EzSecurity with NodeJS and Express
+### END INIT INFO
+ 
+. /etc/init.d/functions
+
+servicename=$(basename "${0}")
+
+LOCKFILE="/var/lock/subsys/${servicename}"
+PIDFILE="/var/run/${servicename}.pid"
+
+PREFIX=/opt/kibana3-ezbake
+
+function start() {
+    echo -n "Starting ${servicename}: "
+
+    daemon  --check ${LOCKFILE} --pidfile ${PIDFILE} "node \"${PREFIX}/app\" &>/tmp/${servicename}.log &"
+    RETVAL=$? 
+
+    if [ $RETVAL -eq 0 ]; then
+        touch "${LOCKFILE}"
+    fi
+    echo
+    return $RETVAL
+}
+
+function stop() {
+    echo -n "Stopping ${servicename}: "
+
+    killproc -p "${PIDFILE}" -d 1
+    RETVAL=$?
+    [ $RETVAL -eq 0 ] && rm -f ${LOCKFILE} ${PIDFILE}
+    echo
+    return $RETVAL
+}
+
+RETVAL=0
+case "$1" in
+    start)
+	start
+	;;
+    stop)
+	stop
+	;;
+    status)
+	echo -n "Status of ${servicename}: "
+        status -p "${PIDFILE}"
+	;;
+    restart)
+	stop
+	start
+	;;
+    *)
+	echo "Usage: ${servicename} {start|stop|status|restart}"
+	exit 1
+	;;
+esac
+exit $RETVAL

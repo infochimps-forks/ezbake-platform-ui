@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="jquery-1.10.2.js"></script>
+    <link href="css/table.css" rel="stylesheet" type="text/css"/>
+    <link href="css/extras.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-ui-1.10.4.custom.js"></script>
+    <script src="js/jquery-ui-timepicker-addon.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/replay.js"></script>
+    <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css"/>
+    <link href="css/jquery-ui-smoothness-theme.css" rel="stylesheet" type="text/css"/>
+    <title>Replay</title>
+</head>
+<body>
+    <div id="divContainer" class="main-navigation">
+        <h2>EzBake Replay</h2>
+
+        <form>
+            <table>
+
+                <col span="1" style="width: 20%">
+                <col span="1" style="width: 80%;">
+
+                <tr>
+                    <td>URI Prefix</td>
+                    <td><input type="text" id="uri" name="uri"
+                               value=""/></td>
+                </tr>
+                <tr>
+                    <td>Start Time</td>
+                    <td><input type="text" id="start" name="start" value=""/></td>
+                </tr>
+                <tr>
+                    <td>End Time</td>
+                    <td><input type="text" id="end" name="end" value=""/></td>
+                </tr>
+                <tr>
+                    <td>Time Zone Offset</td>
+                    <td><select id="TimeZone">
+                        <option value="-1200">-1200</option>
+                        <option value="-1100">-1100</option>
+                        <option value="-1000">-1000</option>
+                        <option value="-0900">-0900</option>
+                        <option value="-0800">-0800</option>
+                        <option value="-0700">-0700</option>
+                        <option value="-0600">-0600</option>
+                        <option value="-0500">-0500</option>
+                        <option value="-0400">-0400</option>
+                        <option value="-0300">-0300</option>
+                        <option value="-0200">-0200</option>
+                        <option value="-0100">-0100</option>
+                        <option value="UTC" selected="selected">UTC</option>
+                        <option value="+0100">+0100</option>
+                        <option value="+0200">+0200</option>
+                        <option value="+0300">+0300</option>
+                        <option value="+0400">+0400</option>
+                        <option value="+0500">+0500</option>
+                        <option value="+0600">+0600</option>
+                        <option value="+0700">+0700</option>
+                        <option value="+0800">+0800</option>
+                        <option value="+0900">+0900</option>
+                        <option value="+1000">+1000</option>
+                        <option value="+1100">+1100</option>
+                        <option value="+1200">+1200</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Topic</td>
+                    <td><input type="text" id="topic" name="topic" value=""/></td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>
+                        <select id="replay_type">
+                            <option value="RAW">RAW</option>
+                            <option value="PARSED" selected="selected">PARSED</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Replay Latest Only</td>
+                    <td>
+                        <select id="replay_latest_only">
+                            <option value="true" selected="selected">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Replay Interval Minutes</td>
+                    <td>
+                        <input type="text" id="replay_interval_minutes" name="replay_interval_minutes" value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a class="refresh-toggle">Auto Refresh ON</a></td>
+                    <td><input type="Button" id="replayButton" value="Submit" class="btn"/></td>
+                </tr>
+            </table>
+        </form>
+
+        <div id="requeststatus"></div><br>
+        <div id="insertstatus"></div><br>
+        <div id="statusTable"></div>
+    </div>
+</body>
+</html>
+
+

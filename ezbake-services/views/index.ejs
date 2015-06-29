@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+* Copyright (C) 2013-2014 Computer Sciences Corporation Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome | EzBake Services&trade;</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+<script type="text/javascript" src="<%= basePath %>lib/platform/platform.js"></script>
+<% if (minified === true) { %>
+    <link rel="import" href="<%= basePath %>components/includes.min.html">
+<% } else { %>
+    <link rel="import" href="<%= basePath %>components/includes.html">
+<% } %>
+
+<link rel="stylesheet" type="text/css" href="<%= basePath %>css/index.css">
+<link rel="stylesheet" type="text/css" href="<%= basePath %>css/reset.css">
+<link rel="stylesheet" type="text/css" href="<%= basePath %>css/custom-fonts.css">
+
+<script type="text/javascript">
+    var baseUrl = "<%= basePath %>";
+</script>
+
+<script type="text/javascript" src="<%= basePath %>js/index.js"></script>
+
+</head>
+<body unresolved touch-action="auto">
+    <classification-banner></classification-banner>
+    <paper-dialog id="creds" layered="true" backdrop="true" heading="My Security Credentials" transition="paper-dialog-transition-center">
+        <div class="console">
+            <p>User DN: <%= dn || username %></p>
+            <p>Raw auth: <pre><%= JSON.stringify(authJson, null, 4) || { } %></pre></p>
+        </div>
+    </paper-dialog>
+
+    <paper-dialog id="about" layered="true" backdrop="true" heading="About EzBake Security" transition="paper-dialog-transition-center">
+        <div class="console">
+            <p>EzBake is crazy awesome.</p>
+            <p>This interface allows manual access to any configured thrift service within the EzBake platform.</p>
+        </div>
+    </paper-dialog>
+
+    <paper-dialog id="properties" layered="true" backdrop="true" heading="EzBake Configuration Properties" transition="paper-dialog-transition-center">
+        <div class="console"></div>
+    </paper-dialog>
+
+    <paper-dialog id="output" layered="true" backdrop="true" heading="Service Output" transition="paper-dialog-transition-center">
+        <div class="console"></div>
+    </paper-dialog>
+
+    <core-toolbar>
+
+		<a href="../" class="core-home clearfix">
+	    	<core-logo>
+		        <img class="logo" src="<%= basePath %>images/ezbake-io-logo.png" />
+		        <h1 flex><span>Services</span></h1>
+	        </core-logo>
+        </a>
+
+        <paper-menu-button icon="more-vert" halign="right" fast>
+            <paper-item name="output" label="Service Output (~)"></paper-item>
+            <paper-item name="properties" label="EzBake Configuration"></paper-item>
+            <paper-item name="mycreds" label="My Credentials"></paper-item>
+            <paper-item name="about" label="About"></paper-item>
+        </paper-menu-button>
+
+    </core-toolbar>
+
+    <% if (thrifts.length > 0) { %>
+        <paper-tabs selected="<%= thrifts[0].meta.label %>" noink nobar>
+            <% for (var i = 0; i < thrifts.length; ++i) { %>
+                <paper-tab name="<%= thrifts[i].meta.label %>" pageIndex="<%= i %>"><%= thrifts[i].meta.label %></paper-tab>
+            <% } %>
+        </paper-tabs>
+
+        <core-pages class="fancy pages" selected="0">
+            <% for (var i = 0; i < thrifts.length; ++i) { %>
+                <% console.log(thrifts) %>
+                <% var thrift = thrifts[i] %>
+                <div id="thrift<%= '_' + i %>">
+
+                    <div class="pages-section clearfix">
+	                    <h2><%= thrift.meta.label %></h2>
+	                    <paper-button name="viewThrift" class="colored" label="View as Thrift"></paper-button>
+	                    <paper-button name="viewJson" class="colored" label="View as JSON"></paper-button>
+	                    <paper-dialog name="thrift" layered="true" backdrop="true" heading="Raw Thrift" transition="paper-dialog-transition-center">
+                            <div class="console">
+    							<pre>
+<%= thrift.original %>
+    							</pre>
+                            </div>
+	                    </paper-dialog>
+	                    <paper-dialog class="core-dialog" name="json" layered="true" backdrop="true" heading="Parsed JSON" transition="paper-dialog-transition-center">
+                            <div class="console">
+    							<pre>
+    								<% delete thrift.original %>
+<%= JSON.stringify(thrift, null, 4) %>
+    							</pre>
+                            </div>
+	                    </paper-dialog>
+                    </div>
+
+                    <!-- Service Display -->
+                    <% for (var service in thrift.service) { %>
+                        <% if (thrift.service.hasOwnProperty(service)) { %>
+
+                        	<div class="pages-section clearfix">
+                            <h3>
+                                <%= service %>
+                                <% if (thrift.service[service]["__extends"] !== undefined) { %>
+                                    extends <%= thrift.service[service]["__extends"] %>
+                                    <% delete thrift.service[service]["__extends"] %>
+                                <% } %>
+                            </h3>
+
+                            <% var renderMethod = function (name, obj) { %>
+                                <!-- MAGIC HAPPENS HERE FOR EACH METHOD -->
+                                <div class="serviceMethod clearfix" id="<%= service + '.' + methodName %>" data-app-name="<%= thrift.meta.appName %>" data-service-name="<%= thrift.meta.serviceName %>">
+                                    <h4><%= name %></h4>
+                                    <textarea style="display: none;"><%- JSON.stringify(obj.params) %></textarea>
+                                    <% if (obj.params === undefined || obj.params.length === 0) { %>
+                                        <p>This method has no parameters.</p>
+                                    <% } else { %>
+                                        <% var EzSecTok = false; %>
+                                        <% for (var j = 0; j < obj.params.length; ++j) { %>
+                                            <% var parm = obj.params[j] %>
+                                            <% if (parm !== undefined) { %>
+                                                <% if (parm.type.toLowerCase().indexOf("securitytoken") !== -1) {
+                                                    EzSecTok = true;
+                                                } else if (parm.type.toLowerCase() === "string") { %>
+                                                    <paper-input class="core-input" name="<%= parm.name %>" label="<%= parm.name %>"></paper-input>
+                                                <% } else if (parm.type.toLowerCase() === "inputfile") { %>
+                                                    <label><%= parm.name %></label> <input name="<%= parm.name %>" type="file" />
+                                                <% } else if (parm.type.toLowerCase() === "bool") { %>
+                                                    <div class="core-checkbox">
+                                                    <%
+                                                        var checked = "";
+                                                        if (parm.__default !== undefined) {
+                                                            if (Object.prototype.toString.call(parm.__default) === "[object Boolean]") {
+                                                                checked = (parm.__default) ? "checked" : "";
+                                                            } else if (Object.prototype.toString.call(parm.__default) === "[object String]") {
+                                                                checked = (parm.__default.toLowerCase().trim() === "false") ? "checked" : "";
+                                                            }
+                                                        }
+                                                    %>
+                                                    <paper-checkbox name="<%= parm.name %>" <%= checked %>></paper-checkbox> <%= parm.name %>
+                                                    </div>
+                                                <% } else { %>
+                                                    <%
+                                                        var ttypes = generated[service].ttypes;
+                                                        var ty = { };
+                                                        if (ttypes !== undefined && ttypes[parm.type] !== undefined) {
+                                                            if (ttypes[parm.type] !== undefined) {
+                                                                var pmeth = ttypes[parm.type];
+                                                                if (Object.prototype.toString.call(pmeth) === "[object Function]") {
+                                                                    ty = new ttypes[parm.type]();
+                                                                } else if (Object.prototype.toString.call(pmeth) === "[object Object]") {
+                                                                    ty = pmeth;
+                                                                }
+                                                            }
+                                                        }
+                                                        var tyStr = JSON.stringify(ty) || "{ }";
+                                                        tyStr = tyStr.replace(/"/g, "'");
+                                                    %>
+                                                    <paper-input multiline floatingLabel name="<%= parm.name %>" label="<%= parm.name %> (<%= parm.type %>)" value="<%= tyStr %>"></paper-input>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+                                        <% if (EzSecTok === true) { %>
+                                            <p>(EzSecurityToken is provided automatically based upon login credentials)</p>
+                                        <% } %>
+                                    <% } %>
+                                    <paper-button raisedButton class="colored" name="post" label="Post"></paper-button>
+                                </div>
+                                <!-- END MAGIC -->
+                            <% } %>
+
+                            <% for (var methodName in thrift.service[service]) { %>
+                                <% if (thrift.service[service].hasOwnProperty(methodName)) { %>
+                                    <% var method = thrift.service[service][methodName] %>
+                                    <%
+                                        (function (s, m) {
+                                            shouldInclude({ service: s, method: m }, function (err, include) {
+                                                if (include === true) {
+                                                    renderMethod(m, method);
+                                                }
+                                            });
+                                        }(service, methodName));
+                                    %>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </core-pages>
+        <core-copyright class="core-copyright"><p>Copyright &copy; 2014. EzBake Thrift Services. All rights reserved.</p></core-copyright>
+    <% } else { %>
+        <p>There are no thrift services currently targetted for consumption within the configuration. Please contact a system administrator if this is not expected.</p>
+    <% } %>
+
+</body>
+</html>

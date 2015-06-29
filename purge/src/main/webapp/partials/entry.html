@@ -1,0 +1,56 @@
+<toaster-container></toaster-container>
+
+<h2>Warehouse Document</h2>
+<p ng-show="displayNotFound">
+Document <span class="wh-emphasize">{{uri}}</span> was not found.
+</p>
+<div ng-show="displayEntry">
+<h3>{{entry.uri}}</h3>
+<br>
+<h4>Versions</h4>
+<table class="wh-table table">
+  <thead>
+    <tr>
+      <th>Timestamp</th>
+      <th>Date</th>
+      <th>Visibility</th>
+      <th>Security Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="version in entry.versions">
+      <td>{{version.timestamp}}</td>
+      <td>{{version.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{version.classification}}</td>
+      <td>{{version.securityId}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Metadata</h4>
+<p class="wh-warning-message" ng-show="entry.errorFetchingMetadata">
+An error occurred when fetching the metadata for this document. As a result, this document's metadata is not displayed. 
+</p>
+<table ng-hide="entry.errorFetchingMetadata" class="wh-table table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="md in entry.metadata">
+      <td>{{md.key}}</td>
+      <td>{{md.value}}</td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <button type="button" class="btn btn-default btn-sm" ng-click="purge()" title="Sends a request to purge this entry from all data repositories">Purge</button>
+</div>
+</div>
+<div class="spinner-wrapper" ng-show="spinner.isInProgress">
+  <div class="spinner" title="{{spinner.title}}"></div>
+  <div class="spinner-content">{{spinner.message}}</div>
+</div>
+ 

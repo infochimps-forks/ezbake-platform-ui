@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="results-container">
+            <div ng-show="resultObject.searchDetails.total_results == 0">
+                <p>No results to display.</p>
+            </div>
+            <div class="saved-search-status" ng-show="savedSearchStatus.active">
+                <p>Results for saved search {{savedSearchStatus.name}} ingested after {{savedSearchStatus.lastFlushed}}</p>
+            </div>
+            <div class="saved-search-limit" ng-show="savedSearchStatus.exceedsLimit">
+                <p>The inbox has exceeded the size limit. Please perform a regular search by ingest time to view all the matching documents.</p>
+            </div>
+            <div class="results-count" ng-show="resultObject.searchDetails.total_results > 0">
+                <p>Page {{resultObject.searchDetails.web_page}} of about {{resultObject.searchDetails.web_pages}}
+                    ({{resultObject.searchDetails.time}} seconds)</p>
+            </div>
+            <!-- Web results -->
+            <div draggable ng-repeat="result in resultObject.webResults | limitTo: 4"
+                 ng-class="{ results: true, selected: result.selected }">
+                <div ng-include src="'partials/web-result.html'"></div>
+            </div>
+            <!--
+            <div id="previews" ng-show="resultObject.searchDetails.total_results > 0">
+                // Image results           
+                <div id="image-search-label"><span class="icon-media icon-image-2"></span>Images for <a href="#">{{query}}</a></div>
+                <div class="image-search-results clearfix">
+                    <a href="{{image.url}}" target="_blank" draggable ng-repeat="image in imageResults | limitTo: 5"><img class="web_preview_image" src="{{image.thumbnail.url}}" border="0"></a>
+                </div>
+                // Video results 
+                <div id="video-search-label">
+                    <span class="icon-media icon-film"></span>
+                        Videos for 
+                    <a href="#">{{query}}</a>
+                </div>
+                <div class="video-search-results clearfix">
+                    <div class="results" draggable ng-repeat="video in videoResults | limitTo: 2">
+                        <div class="video-results">
+                            <img src="{{video.media.thumbnail.url}}" border="0">
+                            <div class="video-info">                            
+                                <a class="video-title" href="#">{{video.title}}</a>
+                                <p class="video-details">{{video.views}} Views - {{video.upload_date}}<br>
+                                Uploaded by <a class="video-author" href="#">{{video.author}}</a></p>
+                                <a class="video-source" href="#">{{video.source}}</a>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            -->
+            <!-- The rest of the web results -->
+            <div draggable ng-repeat="result in resultObject.webResults | startAt: 4"
+                 ng-class="{ results: true, selected: result.selected }">
+                <div ng-include src="'partials/web-result.html'"></div>
+            </div>
+            <div id="pages" ng-show="resultObject.searchDetails.total_results > 0">
+                <a class="icon-pages" ng-show="resultObject.searchDetails.web_page > 1"
+                   ng-click="search(resultObject.searchDetails.web_page - 1)"><span
+                        class="icon-arrow-left-2"></span></a>
+                <a class="pages-active">{{resultObject.searchDetails.web_page}}</a>
+                <a class="icon-pages"
+                   ng-show="resultObject.searchDetails.web_page < resultObject.searchDetails.web_pages"
+                   ng-click="search(resultObject.searchDetails.web_page + 1)"><span
+                        class="icon-arrow-right-2"></span></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<!--   Copyright (C) 2013-2015 Computer Sciences Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. -->
+
+<accordion close-others="true">
+    <div ng-repeat="status in statuses">
+	    <accordion-group is-open="accordionGroups[status.name].open" class="panel-{{status.name}}">
+		    <accordion-heading>
+			    <div ng-click="refreshIfOpen(status)">
+			        <h4 class="h-{{status.name}}" >{{status.name}}</h4>
+			        <div class="arrow">
+			        	<i ng-class="{'icon-arrow-up2': accordionGroups[status.name].open, 'icon-arrow-down2': !accordionGroups[status.name].open}"></i>
+			        </div>
+		     	</div>
+			 </accordion-heading>
+		    <table class="table-header">
+		        <tr>
+		            <th>Application Settings</th>
+		            <th>Admin Controls</th>
+		        </tr>
+		    </table>
+			<div class="spinner-wrapper" ng-show="showSpinner">
+			    <div class="spinner" title="Getting Data From Server"></div>
+				<div class="spinner-content">Loading...</div>
+			</div>
+            <div ng-repeat="app in registered">
+			<table>
+			    <tr>
+				    <td>
+					    <div class="app-set">
+							<div ng-controller="ModalWindowCtrl" class="view-details-wrapper">
+						        <button class="btn view-details" ng-click="open({isApprove:false, template: 'templateContentRegistration', isDelete:false, isApplicationRegistrationDetails: true, isManifestDetails : false})" dialog-window-node alt="View Details"><div aria-hidden="true" class="icon-gallery" title="Details"></div><span>Details</span></button>
+	                        </div>
+					        <div class="left-col"><span>Application Name:</span></div>
+						    <div class="right-col-short">{{app.appName}}</div>
+						    <div class="clearfix"></div>
+						</div>
+						<div class="app-set">
+						    <div class="left-col"><span>Authorizations:</span></div>
+						    <div class="right-col">
+                                {{app.authorizations.join(", ")}}<label ng-show="app.communityAuthorizations.length > 0">,</label> <label ng-class="{ 'community-auth' : status.name === 'PENDING' }">{{app.communityAuthorizations.join(", ")}}</label>
+                                <div ng-show="app.communityAuthorizations.length > 0 && status.name === 'PENDING'" class="community-auth">**Verify all system applications are aware of these community authorizations</div>
+                            </div>
+						    <div class="clearfix"></div>
+						</div>
+						<div class="app-set">
+						    <div class="left-col"><span>Point of Contact:</span></div>
+						    <div class="right-col">{{app.poc}}</div>
+						    <div class="clearfix"></div>
+						</div>
+			            <div class="pipeline-group" ng-repeat="(pipeName, topics) in app.topics">
+			                <div class="pipeline"><div aria-hidden="true" class="icon-rss"></div><span>Pipeline:</span>{{pipeName}}</div>
+			                <div class="inline">
+			                    <table class="topics">
+			                        <tr>
+			                            <td><div aria-hidden="true" class="icon-arrow"></div><span>Topics:</span></td>
+			                            <td><div ng-repeat="topic in topics" class="topic-item">{{topic}}</div></td>
+			                        </tr>
+			                    </table>
+			                </div>
+			            </div>
+			            <div class="aminoJob-group">
+			                <table class="aminoJobs">
+			                    <tr>
+			                        <td><div aria-hidden="true" class="icon-uniE614"></div><span>Amino Jobs:</span></td>
+			                        <td><div ng-repeat="job in app.jobRegistrations"> {{job.jobName}} <div aria-hidden="true" class="icon-link separator"></div> {{job.feedName}}</div></td>
+			                    </tr>
+			                </table>
+			            </div>
+				    </td>
+					<td class="center">
+					    <div class="col-controls">
+						    <div ng-controller="ModalWindowCtrl">
+							    <script type="text/ng-template" id="templateContentRegistration">
+						    <dialog-window-node>
+							    <div class="dialog-window-close" ng-click="close()"><span aria-hidden="true" class="icon-close"></span></div>
+								<div ng-if="isApprove && !isApplicationRegistrationDetails"><span alt="Approve Authorizations"><div ng-include="'partials/registration/approveRegistration.html'"></div></span></div>
+    	   						<div ng-if="!isApprove && !isApplicationRegistrationDetails"><span alt="Deny Authorizations"><div ng-include="'partials/registration/denyRegistration.html'"></div></span></div>
+								<div ng-if="isApplicationRegistrationDetails"><span alt="View Application Registration Details"><div ng-include="'partials/registration/applicationRegistrationDetails.html'"></div></span></div>
+							</dialog-window-node>
+   						</script>
+		   						<span ng-if="status.name === 'PENDING' && app.currentAppAdmin === false">
+								    <button class="btn-cntrl" ng-click="open({isApprove : true, template: 'templateContentRegistration', isDelete : false, isApplicationRegistrationDetails: false, isManifestDetails : false, currentStatus : status.name})" dialog-window-node alt="Approve">Approve</button>
+								</span>
+								<span ng-if="status.name !== 'DENIED'  && app.currentAppAdmin === false">
+									<button class="btn-cntrl" ng-click="open({isApprove : false, template: 'templateContentRegistration', isDelete : false, isApplicationRegistrationDetails: false, isManifestDetails : false, currentStatus : status.name})" dialog-window-node alt="Deny">Deny</button>
+								</span>
+		                    </div>
+		           		</div>
+	   			 	</td>
+				</tr>
+		    </table>
+            </div>
+	    </accordion-group>
+	</div>
+</accordion>

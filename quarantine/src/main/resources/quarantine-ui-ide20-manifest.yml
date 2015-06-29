@@ -1,0 +1,22 @@
+Application:
+  name: quarantine
+  datasets: []
+  security_id: 7496276251869807698
+  auths: []
+
+  Services:
+    -
+      type: WebApp
+      web_app_name: quarantineweb
+      timeout: 60
+      timeout_retries: 3
+      artifact_info:
+        resources:
+          cpu: small
+          mem: small
+          disk: small
+        language: Java
+        bin: ROOT.war
+        config: []
+        auths: []
+      external_web_url: quarantine

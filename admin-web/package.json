@@ -1,0 +1,40 @@
+{
+    "name" 					: "admin-web",
+    "version" 				: "0.0.0",
+    "description"			: "ins admin",
+    "main"					: "src/main/webapp/index.html",
+    "repository"			: "",
+    "author" 				: "",    
+    "gruntReadmeFilename"	: "grunt_readme.md",
+
+    "directories" : {
+    	"test"				: "test"
+    },
+
+    "scripts" :  {
+    	"test"				: "test.sh"
+    },
+
+    "devDependencies" : {
+        "grunt" 					:   "~0.4.0",
+        "grunt-contrib-cssmin"		:   "*",
+        "grunt-contrib-uglify"		:   "*",
+        "grunt-contrib-concat"		: 	"*",
+        "grunt-contrib-copy"		:	"*",
+        "grunt-contrib-watch"		:   "*",
+        "grunt-contrib-clean"  	 	:   "*",
+        "grunt-ngmin"				:   "*",
+        "grunt-usemin"				:	"*",
+        "grunt-cssc"				: 	"*",
+        "grunt-htmlhint"			:   "*",
+
+        "grunt-karma"				:	"*",
+        "karma-junit-reporter"		:	"*",
+        "karma-chrome-launcher"		:	"*",
+        "karma-firefox-launcher"	:	"*",
+        "karma-script-launcher"		:	"*",
+        "karma-jasmine"				:	"*",
+
+        "matchdep"					:   "*"
+    }
+}

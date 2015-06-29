@@ -1,0 +1,118 @@
+<!--   Copyright (C) 2013-2015 Computer Sciences Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. -->
+
+<accordion close-others="true">
+	<div ng-repeat="status in deployerStatuses">
+	    <accordion-group is-open="accordionGroups[status.name].open" class="panel-{{status.name}}" >
+		    <accordion-heading >
+		    	<div ng-click="refreshIfOpen(status)">
+			    	<h4 class="h-{{status.name}}" >{{status.name}}</h4>
+			        <div class="arrow">
+			        	<i ng-class="{'icon-arrow-up2': accordionGroups[status.name].open, 'icon-arrow-down2': !accordionGroups[status.name].open}"></i>
+			        </div>
+		        </div>
+		    </accordion-heading>
+			<table class="table-header">
+		        <tr>
+		            <th>Application Settings</th>
+		            <th>Admin Controls</th>
+		        </tr>
+		    </table>
+			<div class="spinner-wrapper" ng-show="showSpinner">
+			    <div class="spinner" title="Getting Data From Server"></div>
+				<div class="spinner-content">Loading...</div>
+			</div>
+			<table ng-repeat="(appSecId, app) in deploymentApps">
+			    <tr>
+					<td>
+					    <div class="app-set">
+					        <div class="left-col"><span>Application Name:</span></div>
+						    <div class="right-col">{{app[0].appName}}</div>
+						    <div class="clearfix"></div>
+						</div>
+						<div class="app-set">
+						    <div class="left-col"><span>Point of Contact:</span></div>
+						    <div class="right-col">{{app[0].poc}}</div>
+						    <div class="clearfix"></div>
+						</div>
+						<div class="app-set">
+						    <div class="left-col"><span>Packages:</span></div>
+						    <div class="right-col">
+							        <ul class="packages">
+						       			<div ng-controller="ModalWindowCtrl">
+						       				<script type="text/ng-template" id="templateUndeployArtifact">
+						       					<dialog-window-node>
+						       						<div class="">
+						       							<h2>Confirm</h2>
+						       							<p>Undeploy the service ({{pkg.appServiceId}})?</p>
+						       							<div class="centered">
+						       								<button class="btn-cntrl" ng-click="undeploy()">Undeploy</button>
+						       								<button class="btn-cntrl" ng-click="close()">Cancel</button>
+						       							</div>
+						       						</div>
+						       					</dialog-window-node>
+						       				</script>
+
+							        		<div ng-repeat="pkg in app">
+							        			<div ng-if="status.name !== 'ACTIVE' && status.name !== 'PENDING'"><li >{{pkg.appServiceId}}</li></div>
+							        			<div ng-if="status.name === 'ACTIVE' || status.name === 'PENDING'" >
+							        				<li>
+							        					<button class="btn view-package"
+							        							ng-click="open({ template: 'templateUndeployArtifact', controller: 'UndeployPkgModalCtrl', servicePackage: pkg, currentStatus: status.deployerValue })"
+							        							ng-if="status.name == 'ACTIVE'"
+							        							dialog-window-node alt="Undeploy Service">
+							        						<div aria-hidden="true" class="icon-remove" title="Undeploy"></div>
+							        					</button>
+
+							        					<button class="btn view-package" ng-click="open({template: 'templateContentDeployment', subTemplate: 'partials/deployment/applicationManifestDetails.html', altText: 'Application Manifest Details', servicePackage : pkg, currentStatus : status.deployerValue})"
+							        				          dialog-window-node alt="View Application Manifest Details">
+							        						<div aria-hidden="true" class="icon-stack" title="Details"></div></button>{{pkg.appServiceId}}</li>
+							        			</div>
+							        		</div>
+						    			</div>
+								    </ul>
+						 </div>
+						 <div class="clearfix"></div>
+			    	</td>
+	       			<td class="center">		
+			      		<div class="col-controls">
+							<div ng-controller="ModalWindowCtrl">
+								<script type="text/ng-template" id="templateContentDeployment"> 
+									<dialog-window-node>		
+										<div><span alt="{{altText}}"><div ng-include="subTemplate"></div></span></div>
+									</dialog-window-node>
+   								</script>
+	   							<span ng-if="status.name === 'PENDING' && app[0].currentAppAdmin === false">
+									<button class="btn-cntrl" ng-click="open({template: 'templateContentDeployment', subTemplate: 'partials/deployment/approveDeployment.html', altText: 'Approve and Deploy Application', currentStatus : status.deployerValue})" dialog-window-node alt="Approve">Approve</button>
+									<button class="btn-cntrl" ng-click="open({template: 'templateContentDeployment', subTemplate: 'partials/deployment/denyDeployment.html', altText: 'Deny Application', currentStatus : status.deployerValue})" dialog-window-node alt="Deny">Deny</button>
+								</span>
+								<span ng-if="status.name === 'ACTIVE' && app[0].currentAppAdmin === false">
+	                    			<button class="btn-cntrl" ng-click="open({template: 'templateContentDeployment', subTemplate: 'partials/deployment/undeploy.html', altText: 'Undeploy Application', currentStatus : status.deployerValue})" dialog-window-node alt="Undeploy">Undeploy</button>
+	                    		</span>
+                                <span ng-if="status.name === 'DENIED' && app[0].currentAppAdmin === false">
+									<button class="btn-cntrl" ng-click="open({template: 'templateContentDeployment', subTemplate: 'partials/deployment/deleteDeployment.html', altText: 'Delete Application', currentStatus : status.deployerValue})" dialog-window-node alt="Delete">Delete</button>
+								</span>
+								<span ng-if="status.name === 'UNDEPLOYED' && app[0].currentAppAdmin === false">
+									<button class="btn-cntrl" ng-click="open({template: 'templateContentDeployment', subTemplate: 'partials/deployment/approveDeployment.html', altText: 'Redeploy App', currentStatus : status.deployerValue})" dialog-window-node alt="ReDeploy">ReDeploy</button>
+									<button class="btn-cntrl" ng-click="open({template: 'templateContentDeployment', subTemplate: 'partials/deployment/deleteDeployment.html', altText: 'Delete Application', currentStatus : status.deployerValue})" dialog-window-node alt="Delete">Delete</button>
+								</span>
+	                    		
+                       		</div> 
+	           			</div>
+	         	    </td>
+	         	</tr>
+			</table>
+	    </accordion-group>
+    </div>
+</accordion>

@@ -1,0 +1,23 @@
+    <div class="form-content" id="regproc-amino-jobs-info">
+        <div>
+            <div class="mar-b20 mar-t20">Create amino job by mapping Job Name to Pipeline Name</div>
+            <div class="inline">
+                <input ng-model="page.currentItem.jobName" class="input half" placeholder="Job Name">
+            </div>
+            <div class="inline">
+                <span class="icon-link aminoJob-icon mar-l10 mar-r10"></span>
+            </div>
+            <div class="inline">
+                <select name="name" ng-model="page.currentItem.feedName" class="aminoJob" ng-options="feedName for feedName in getAllFeedNamesForJobRegistration() | orderBy:'toString()'" placeholder="Select Feed Name">
+                    <option value="" disabled selected>Select Pipeline Name</option>
+                </select>
+            </div>
+            <div class="inline">
+                <button type="button" class="btn plus" title="Add Amino Job" alt="Add Amino Job" ng-click="addCurrentItem(page)"><span aria-hidden="true" class="icon-plus"></span></button>
+            </div>
+        </div>
+        <div class="divider-mini"></div>
+        <div class="centered">
+            <button type="button" class="cancel-app cancel-small" ng-click="continueRegistration(page, 'cancel')">Cancel</button>
+        </div>
+    </div>

@@ -1,0 +1,16 @@
+<div class="comment-wrapper">
+    <script type="text/ng-template" id="upload-modal.html"></script>
+    <div class="modal-header">
+        <h4>Import Data</h4>
+        {{my}}
+    </div>
+    <div class="modal-body">
+        <input type="file" ng-file-select="onFileSelect($files)">
+        <br>
+        Enter pass phrase : <input type="password" ng-model="passphrase.text">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">Done</button>
+        <button class="btn btn-primary" ng-click="triggerUpload()">Import</button>
+    </div>
+</div>

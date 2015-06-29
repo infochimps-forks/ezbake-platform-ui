@@ -1,0 +1,238 @@
+<!--   Copyright (C) 2013-2015 Computer Sciences Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. -->
+
+<div class="" data-ng-init="viewApplicationRegistrationDetails(app.appId)">
+	<h2>Basic Information</h2>
+	<div class="input-container">
+		<div class="input-label">Application Name:</div>
+		<div class="input-field">{{applicationRegistrationDetails.appName}}</div>
+	</div>
+	<div class="input-container">
+		<div class="input-label">Application Id:</div>
+		<div class="input-field">{{applicationRegistrationDetails.id}}</div>
+	</div>
+    <div class="input-container">
+		<div class="input-label">Admin Users:</div>
+	    <div class="input-field">			
+	    	<div ng-repeat="user in applicationRegistrationDetails.allowedUsers">
+				<div class="input-field">{{user}}</div><br/>
+			</div>
+		</div>
+	</div>
+	<div class="input-container">
+		<div class="input-label">Point of Contact Email:</div>
+		<div class="input-field">{{applicationRegistrationDetails.poc}}</div>
+	</div>
+	<div class="input-container">
+		<div class="input-label">Sponsoring Organization:</div>
+		<div class="input-field">{{applicationRegistrationDetails.sponsoringOrganization}}</div>
+	</div>
+	<div class="input-container">
+		<div class="input-label">Application Authorizations:</div>
+		<div class="input-field">
+	    	<div ng-repeat="auth in applicationRegistrationDetails.authorizations">
+				<div class="input-field">{{auth}}</div><br/>
+			</div>
+            <div ng-repeat="auth in applicationRegistrationDetails.communityAuthorizations">
+                <div class="input-field">{{auth}}</div><br/>
+            </div>
+		</div>
+	</div>
+	<div class="input-container">
+		<div class="input-label">Application Icon:</div>
+		<div class="input-field"><img id="appIcon" ng-src="{{applicationRegistrationDetails.appIconSrc}}" /></div>
+	</div>
+		
+	<div class="divider"></div>
+	<h2>Feed Information</h2>
+    <div ng-show="applicationRegistrationDetails.feedPipelinesSize == 0">
+        <div class="input-container">
+            <div class="input-label">No registered Feeds</div>
+        </div>
+        <br/>
+    </div>
+	<div ng-repeat="feedPipe in applicationRegistrationDetails.feedPipelines" >
+	    <div class="input-container">
+			<div class="input-label">Feed Name:</div>
+			<div class="input-field">{{feedPipe.feedName}}</div>
+		</div>
+	    <div class="input-container">
+			<div class="input-label">Feed Description:</div>
+			<div class="input-field">{{feedPipe.description}}</div>
+	    </div>
+	    <div class="input-container">
+			<div class="input-label">System that Exports Data:</div>
+			<div class="input-field">{{feedPipe.exportingSystem}}</div>
+		</div>
+	    <div class="input-container">
+			<div class="input-label small">Highest Classification of Data:</div>
+			<div class="input-field">{{feedPipe.maxClassification}}</div>
+		</div>
+	    <div class="input-container">
+			<div class="input-label">Network Initiated:</div>
+			<div class="input-field">{{feedPipe.networkInitiated}}</div>
+		</div>
+	    <div class="input-container">
+			<div class="input-label">Data Type:</div>
+			<div class="input-field">{{feedPipe.dataType}}</div>
+		</div>
+	    <div class="input-container">
+			<div class="input-label">Type:</div>
+			<div class="input-field">{{feedPipe.type}}</div>
+		</div>
+	    <div class="input-container">
+			<div class="input-label">Physical Server:</div>
+			<div class="input-field">{{feedPipe.physicalServers}}</div>
+	    </div>
+	    <div class="input-container">
+			<div class="input-label">Date Added:</div>
+			<div class="input-field">{{feedPipe.dateAdded}}</div>
+		</div>
+				
+	    <div class="mar-t20">
+			<h5>Topics to Broadcast To: (optional)</h5>
+			<div ng-repeat="topic in feedPipe.broadcastTopics">
+			    <div class="input-container">
+					<div class="input-label">Topic Name:</div>
+					<div class="input-field">{{topic.name}}</div>
+				</div>
+			    <div class="input-container">
+					<div class="input-label">Topic Description:</div>
+					<div class="input-field">{{topic.description}}</div>
+				</div>
+			    <div class="input-container">
+					<div class="input-label small">Thrift Definition:</div>
+					<div class="input-field">
+						<span tooltip="{{topic.thriftDefinition}}" tooltip-placement="right" class="bold font-blue">View Definition</span>
+					</div>
+				</div>
+				<div class="divider"></div>
+			</div>
+		</div> 
+	</div>
+    <div class="divider"></div>
+
+    <h2>Listening Pipelines Information</h2>
+    <div ng-show="applicationRegistrationDetails.listenerPipelinesSize == 0">
+        <div class="input-container">
+            <div class="input-label">No registered Listeners</div>
+        </div>
+        <br/>
+    </div>
+	<div ng-repeat="listenerPipe in applicationRegistrationDetails.listenerPipelines" >
+	    <div class="input-container">
+		    <div class="input-label">Pipeline Name:</div>
+		    <div class="input-field">{{listenerPipe.feedName}}</div>
+		</div>
+		<div class="input-container">
+		    <div class="input-label">Pipeline Description:</div>
+		    <div class="input-field">{{listenerPipe.description}}</div>
+		</div>
+		<div class="input-container">
+		    <div class="input-label">Topics You're Listening To:</div>
+		    <div class="input-field">			
+		    	<div ng-repeat="topic in listenerPipe.listeningTopics">
+					<div class="input-field">{{topic}}</div><br/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mar-t20">
+			<h5>Topics to Broadcast To: (optional)</h5>
+			<div ng-repeat="topic in listenerPipe.broadcastTopics">
+			    <div class="input-container">
+				    <div class="input-label">Topic Name:</div>
+				    <div class="input-field">{{topic.name}}</div>
+				</div>
+				<div class="input-container">
+				    <div class="input-label">Topic Description:</div>
+				    <div class="input-field">{{topic.description}}</div>
+				</div>
+				<div class="input-container">
+				    <div class="input-label small">Thrift Definition</div>
+				    <div class="input-field">
+				    	<span tooltip="{{topic.thriftDefinition}}" tooltip-placement="right" class="bold font-blue">View Definition</span>
+			    	</div>
+				</div>
+			<div class="divider"></div>
+			</div>
+		</div>
+	</div>
+    <div class="divider"></div>
+
+    <h2>Web Application Info</h2>
+	<div class="input-container">
+	    <div class="input-label">Your App's URL:</div>
+	    <div class="input-field">{{applicationRegistrationDetails.webApp.externalUri}}</div>
+	</div>
+	<div class="input-container">
+	    <div class="input-label">Group Name:</div>
+	    <div class="input-field">{{applicationRegistrationDetails.webApp.requiredGroupName}}</div>
+	</div>
+    <div ng-show="applicationRegistrationDetails.webApp.urnMapSize > 0">
+    	<div class="input-label">Urn <div aria-hidden="true" class="icon-link separator"></div> webApp:</div>
+        <br/>
+	    <div class="input-field">
+		    <div ng-repeat="(urnKey, webApp) in applicationRegistrationDetails.webApp.urnMap">
+			    {{urnKey}} <div aria-hidden="true" class="icon-link separator"></div> {{webApp.webUrl}}<br>
+		    </div>
+        </div>
+    </div>
+	<div ng-if="applicationRegistrationDetails.webApp.isChloeEnabled"class="input-label">
+        <div class="input-label">Chloe Web Url:</div>
+        <div class="input-field">{{applicationRegistrationDetails.webApp.chloeWebUrl}}</div>
+    </div>
+    <br/>
+			
+    <div class="divider"></div>	
+	<h2>Intent Query</h2>
+    <div ng-show="applicationRegistrationDetails.intentServiceMapSize == 0">
+        <div class="input-container">
+            <div class="input-label">No registered Intent Queries</div>
+        </div>
+        <br/>
+    </div>
+    <div ng-hide="applicationRegistrationDetails.intentServiceMapSize == 0">
+        <div class="input-label">Intent <div aria-hidden="true" class="icon-link separator"></div> Service</div>
+        <br/>
+            <div class="input-field">
+                <div ng-repeat="(intent, service) in applicationRegistrationDetails.intentServiceMap">
+                    {{intent}} <div aria-hidden="true" class="icon-link separator"></div> {{service}}<br>
+            </div>
+        </div>
+    </div>
+	<div class="divider"></div>
+
+	<h2>Amino Jobs</h2>
+    <div ng-show="applicationRegistrationDetails.jobRegistrationsSize == 0">
+        <div class="input-container">
+            <div class="input-label">No registered Amino Jobs</div>
+        </div>
+        <br/>
+    </div>
+    <div ng-hide="applicationRegistrationDetails.jobRegistrationsSize == 0">
+        <div class="input-label">Job Name <div aria-hidden="true" class="icon-link separator"></div> Feed Name</div>
+        <br/>
+        <div class="input-field">
+            <div ng-repeat="job in applicationRegistrationDetails.jobRegistrations">
+                {{job.jobName}} <div aria-hidden="true" class="icon-link separator"></div> {{job.feedName}}<br>
+            </div>
+        </div>
+    </div>
+	<div class="divider"></div>		
+	<div class="centered">
+		    <button class="btn-cntrl" ng-click="close()">Close</button>
+	</div>
+	
+</div>

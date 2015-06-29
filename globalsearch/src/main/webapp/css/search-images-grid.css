@@ -1,0 +1,107 @@
+.related-image-results {
+    width: auto;
+    padding: 0 40px;
+}
+
+.related-image-results a {
+    text-decoration: none;
+    color: #3197cb;
+    padding: 0 5px;
+}
+
+.related-image-results a:hover {
+    color: #006699;
+}
+
+#gallery {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0 0 0 32px;
+}
+
+#gallery .image-holder {
+    margin: 8px;
+    display: block;
+    float: left;
+    padding: 0px;
+    text-decoration: none;
+}
+
+#gallery .image-holder a {
+    display: block;
+}
+
+#gallery .image-holder img {
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    outline-offset: -1px;
+    margin-bottom: -4px;
+}
+
+#gallery .image-holder.hovered {
+    position: relative;
+    z-index: 999;
+    margin: -2px;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#gallery .image-holder .information {
+    display: none;
+    color: #999;
+    width: 100%;
+}
+
+#gallery .image-holder.hovered .information {
+    display: block;
+}
+
+#gallery .image-holder .information h2 {
+    color: #3196ca;
+    margin: 15px 0 5px 0;
+}
+
+#gallery .image-holder .information p {
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+}
+
+#gallery .image-holder .information p.dimensions {
+    color: #242424;
+}
+
+#gallery .image-holder .information p.similar {
+    margin: 5px 0 0 0;
+}
+
+#gallery .image-holder .information p.similar a {
+    font-size: 12px;
+    color: #3196ca;
+    text-decoration: none;
+}
+
+#gallery .image-holder .information p.similar a:hover {
+    color: #1176aa;
+    text-decoration: none;
+}
+
+#ibox {
+    position: absolute;
+    overflow-y: none;
+    background: #fff;
+    z-index: 1001;
+    display: none;
+    padding: 10px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#ibox img {
+    border: 1px solid #444;
+}
+
+#ibox br {
+    clear: both;
+}

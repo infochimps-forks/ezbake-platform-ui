@@ -1,0 +1,15 @@
+{
+    "elasticSearch": {
+        "allowableIndices": ["_nodes"],
+        "ezConfigHost": "elastic.host.name",
+        "ezConfigPort": "elastic.port"
+
+    },
+    "redis": {
+        "host":"redis.host",
+        "port":"redis.port"
+    },
+    "indexDateRegex": "-\\d{4}\\.\\d{1,2}\\.\\d{1,2}$",
+    "EZ_GROUPS_APPLICATION_NAME": "common_services",
+    "unauthorizedErrorText": "You are unauthorized to view this site."
+}

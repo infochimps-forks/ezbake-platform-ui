@@ -1,0 +1,105 @@
+<div class="form-content" id="regproc-feeds-and-data">
+    <ul class="no-disc">
+        <div ng-hide="wantToAddNewFeed">
+            <h2>Feed Pipeline Information:</h2>
+            <li>
+                <div class="input-container">
+                    <div class="input-label">Category</div>
+                    <div class="input-field">
+                        <select ng-model="newCategoryValue" ng-options="c for c in categories | orderBy:'toString()'" placeholder="Select Data Type">
+                            <option value="" disabled selected>Select Category</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">Pipeline Name</div>
+                    <div class="input-field">
+                        <input ng-model="page.currentItem.feedName" value="{{page.currentItem.feedName}}" class="input" ng-required="true">
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-label">Pipeline Description</div>
+                    <div class="input-field">
+                        <input name="description" ng-model="page.currentItem.description"  class="input"/>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">System that Exports Data</div>
+                    <div class="input-field">
+                        <input name="exportingSystem" ng-model="page.currentItem.exportingSystem" class="input"/>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-label small">Highest Classification of Data</div>
+                    <div class="input-field">
+                        <input name="maxClassification" ng-model="page.currentItem.maxClassification"  class="input"/>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">Network Initiated</div>
+                    <div class="input-field">
+                        <select name="networkInitiated" ng-model="page.currentItem.networkInitiated" >
+                            <option value="" disabled selected>Select Network</option>
+                            <option>NIPR</option>
+                            <option>SIPR</option>
+                            <option>JWICS</option>
+                            <option>OTHER</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">Data Type</div>
+                    <div class="input-field">
+                        <input name="dataType" ng-model="page.currentItem.dataType"  class="input" placeholder="SQL, XML, HTML, CSV, etc" />
+                    </div>
+                </div>
+
+                <h2>Topics to Broadcast To: (optional)</h2>
+                <div class="newTopic">
+                    <div class="input-container">
+                        <div class="input-label">Topic Name</div>
+                        <div class="input-field"><input ng-model="newFeedTopic.name" ng-blur="topicNameIsUnique(newFeedTopic.name)" class="input-short" /></div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-label">Topic Description</div>
+                        <div class="input-field"><input ng-model="newFeedTopic.description" class="input" placeholder="What data is broadcast and when" /></div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-label">Thrift Definition</div>
+                        <div class="input-field half">
+                            <div ng-controller="FileUploadCtrl" id="uploadFeedsThrift" class="import" ng-init="topicDetail = {}">
+                                <div class="import-btn-over inline">
+			                        <div class="fileUpload chooseBtn thriftBtn inline middle">Upload Thrift Definition<input type="file" ng-file-select="uploadThrift($files, newFeedTopic, topicDetail)" class="choose-file fixedWidth inline middle"/></div>
+			                        <input id="feedTopicFile" placeholder="No file chosen" disabled="disabled" class="file-display inline middle font-green" ng-model="topicDetail.thriftFileName" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-label"></div>
+                        <div class="input-field"><button type="button" class="btn gray fixed-width-btn" ng-click="addFeedTopic(page.currentItem, newFeedTopic)">Add Topic</button></div>
+                    </div>
+                    <ul class="no-disc" ng-repeat="topic in page.currentItem.broadcastTopics" title="Topics List">
+                        <div class="input-field">
+                            <div class="data-item">
+                                <li class="relative">
+                                    <div class="relative">
+                                        <div class="item-container no-margin">{{topic.name}}</div>
+                                        <button type="button" class="remove" title="Remove Topic" alt="Remove Topic" ng-click="removeTopic(page.currentItem, $index)"><span aria-hidden="true" class="icon-remove"></span></button>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </ul>
+
+
+                </div>
+                <button type="button" class="btn large-btn get-started mar-t20 mar-b30" ng-click="addCategory(page.currentItem.feedName,newCategoryValue); addCurrentItem(page)">Add Feed</button>
+                <div class="centered">
+                    <button type="button" class="cancel-app cancel-small" ng-click="continueRegistration(page, 'cancel')">Cancel</button>
+                </div>
+        </div>
+        </li>
+    </ul>
+</div>

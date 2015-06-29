@@ -1,0 +1,20 @@
+<div class="comment-wrapper">
+
+    <script type="text/ng-template" id="additional-metadata-modal.html"></script>
+    <div class="modal-header">
+        <h4>Additional Metadata</h4>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <div class="divRow" ng-repeat="(key, value) in data">
+                <div class="modal-key">{{key}}</div>
+                <div class="modal-value"><p style="white-space: pre-wrap;">{{value.value}}</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="done()">Close</button>
+    </div>
+
+</div>
+

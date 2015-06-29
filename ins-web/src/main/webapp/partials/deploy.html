@@ -1,0 +1,57 @@
+<div class="slide-wrapper" >
+    <h1>Deploy Your Application</h1>
+    <p>Build your deployment package to make your application visible.</p>
+        <form id="deployFormData" method="post" enctype="multipart/form-data" name="deployForm" novalidate>
+            <fieldset ng-controller="AppsCtrl">
+                <div class="build-wrapper">
+                    <div class="build-container" ng-hide="simple === false">
+                        <span>Add Application File (.JAR, .WAR, or .EAR)<br/>
+                        Or <a ng-click="simple=false">use advanced</a> option</span>
+                        <div class="fileUpload chooseBtn">Choose File<input id="uploadAppArchiveFileBtn" type="file" ng-file-select="validateArchiveFile($files)" class="choose-file" name="appArchive"/>
+                        </div>
+                        <input id="uploadAppArchiveFile" placeholder="No file chosen" disabled="disabled" class="file-display" ng-model="appArchive" name="archiveFile" required/>
+                       	<span class="font-red" ng-show="deployForm.archiveFile.$error.required">Valid application archive file required.</span>
+                    </div>
+
+                    <div class="build-container" ng-show="simple === false">
+                        <span>Add Deployer tar.gz<br/>
+                         Or <a ng-click="simple=true">use simple</a> option
+                        </span>
+
+                        <div class="fileUpload chooseBtn">Choose File<input id="uploadTarFileBtn" type="file" ng-file-select="formatFileAttributes($files, false, false, true)" class="choose-file" name="appTar"/>
+                        </div>
+                        <input id="uploadAppTarFile" placeholder="No file chosen" disabled="disabled" class="file-display" ng-model="appTar" name="tarArchiveFile" required/>
+                       	<span class="font-red" ng-show="deployForm.tarArchiveFile.$error.required">Valid application archive file required.</span>
+                    </div>
+
+                    <div class="build-container">
+                        <span>Add Manifest File (.YML)</span>
+                        <div class="fileUpload chooseBtn">Choose File<input id="uploadAppManifestFileBtn" type="file" ng-file-select="validateManifestFile(appSecId, $files)" class="choose-file" name="appManifest" required/>
+                        </div>
+                        <input id="uploadAppManifestFile" placeholder="No file chosen" disabled="disabled" class="file-display" ng-model="appManifest" name="manifestFile" required />
+                        <span class="font-red" ng-show="deployForm.manifestFile.$error.required">{{manifestValidationMessage}}</span>
+                    </div>
+                    
+                    <div class="build-container" ng-hide="simple === false">
+                        <span>Add Configuration Files (.properties)</span>
+      					<div class="fileUpload chooseBtn">Select Multiple<input id="uploadAppPropertiesFileBtn" type="file" ng-file-select="formatFileAttributes($files, false, true, false)" class="choose-file" name="appProperties" multiple/>
+                        </div>
+                        <input id="uploadAppPropertiesFile" disabled="disabled" class="file-display multiple" ng-model="appProperties" multiple/>
+                        <div id="fileList">
+                        	<ul>
+                           		<div ng-repeat="appProperty in appProperties">
+		                       		<li>{{appProperty}}</li>
+		                   		</div>
+		                   </ul>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="appSecId={{appSecId}}">
+                <input type="submit" class="btn" value="Deploy Application" ng-disabled="!isValidForm()" ng-hide="showSpinner" ng-click="deployerSpinner();prepForm(appSecId)"/>
+                <div class="spinner-wrapper" ng-show="showSpinner">
+                    <div class="spinner" title="Deploying application."></div>
+                    <div class="spinner-content">{{uploadingMessage}}</div>
+                </div>
+            </fieldset>
+        </form>
+</div>

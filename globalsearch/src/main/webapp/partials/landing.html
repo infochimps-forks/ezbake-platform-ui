@@ -1,0 +1,29 @@
+<div class="landing">
+    <div class="landing-content">
+        <img src="img/logo.png"/>
+
+        <div class="input-container">
+            <input type="text" class="search-form" name="searchText" id="searchBox" ng-model="searchText"
+                   global-search-enter="searchRedirect()" placeholder="Search...">
+            <a ng-click="searchRedirect()" class="search-btn"><span class="icon-search-3"></span></a>
+        </div>
+        <!--
+		<ul class="clearfix">
+			<li>
+				<a href="#">Recent Searches</a>
+			</li>
+			<li>
+				<a href="#">Saved Searches</a>
+			</li>
+			<li>
+				<a href="#">Advanced Search</a>
+			</li>
+		</ul>
+		-->
+    </div>
+    <div class="footer-content">
+        <p>Copyright &copy; 2014. Global Search. All rights reserved.</p>
+    </div>
+
+</div>
+<toaster-container></toaster-container>

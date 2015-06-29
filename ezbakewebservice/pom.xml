@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ezbake</groupId>
+        <artifactId>ezbake-platform-ui-parent</artifactId>
+        <version>2.1</version>
+    </parent>
+
+    <groupId>ezbake.webservices</groupId>
+    <artifactId>ezbake-webservice</artifactId>
+    <packaging>war</packaging>
+    <version>2.1</version>
+    <name>ezbake-webservice Webapp</name>
+
+    <dependencies>
+        <!-- Third-Party Dependency -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+        </dependency>
+
+        <!-- Ezbake Dependencies -->
+        <dependency>
+            <groupId>ezbake</groupId>
+            <artifactId>ezbake-configuration-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ezbake</groupId>
+            <artifactId>ezbake-profile-thrift</artifactId>
+            <exclusions>
+                <!--
+                   Solves an issue created by some Hadoop jar's that are being included by EzProfile service.  At deployment,
+                   was causing the following error:
+
+                   SEVERE: Conflicting URI templates. The URI template / for root resource class org.apache.hadoop.hdfs.server.namenode.web.resources.NamenodeWebHdfsMethods and the URI template / transform to the same regular expression (/.*)?
+    18:38:39,784 ERROR [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/ezbake-webservice]] (MSC service thread 1-2) StandardWrapper.Throwable: com.sun.jersey.spi.inject.Errors$ErrorMessagesException
+
+                   This exclusion may not be needed at some point in the future, however removal of this exclusion should
+                   be regression tested.  See "mvn dependency:tree" to observe the effect of this block.
+                -->
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-client</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ezbake</groupId>
+            <artifactId>ezbake-security-client</artifactId>
+        </dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                    <!-- We want the test output printed to the screen for now -->
+                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                    <!-- 
+                        To create an EzConfiguration object with a 
+                        properties file, the same way that thrift-runner will.
+                     -->
+                    <environmentVariables>
+                        <EZCONFIGURATION_DIR>${basedir}/src/test/resources/</EZCONFIGURATION_DIR>
+                    </environmentVariables>
+                    <!--
+                             Alternate approaches, useful depending on your
+                             IDE's support for test frameworks:
+
+                             <systemPropertyVariables>
+                                 <EZCONFIGURATION_DIR>${basedir}/src/main/resources/</EZCONFIGURATION_DIR>
+                             </systemPropertyVariables>
+
+                                 - OR -
+
+                             <systemProperties>
+                                 <property>
+                                     <name>EZCONFIGURATION_DIR</name>
+                                     <value>${basedir}/src/main/resources/</value>
+                                 </property>
+                             </systemProperties>
+                    -->
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <finalName>ezbake-webservice</finalName>
+    </build>
+</project>

@@ -1,0 +1,25 @@
+{
+  "name": "components",
+  "version": "0.0.1",
+  "authors": [
+    "Jerry Conner <jconner@42six.com>"
+  ],
+  "description": "web components",
+  "keywords": [
+    "web-components",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "classification-banner": "../../../../../classificationbanner/",
+    "angular-chosen-localytics": "~1.0.6"
+  }
+}

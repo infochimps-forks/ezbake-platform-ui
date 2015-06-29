@@ -1,0 +1,9 @@
+#This file is part of the ezfrontend-ui RPM package
+/opt/ezfrontend-ui/ezfrontend-ui.log {
+   create
+}
+/opt/ezfrontend-ui/logstash.log {
+   create
+   missingok
+}
+

@@ -1,0 +1,15 @@
+<h2>Document Purge</h2>
+<div ng-switch="step">
+  <div ng-switch-when="1">
+    <div ng-include src="'partials/purge-list.html'"></div>
+  </div>
+  <div ng-switch-when="2">
+    <div ng-include src="'partials/purge-confirm.html'"></div>
+  </div>
+  <div ng-switch-when="3">
+    <div ng-include src="'partials/purge-submitted.html'"></div>
+    <button type="button" class="btn btn-default btn-sm" ng-click="cancelRemove()" title="Returns back to the list of SSR entries." ng-show="hasItems()">
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;Return
+    </button>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+{
+  "name": "kibana-authentication-proxy",
+  "version": "2.0.0",
+  "description": "Hosts a custom kibana3 and elasticsearch behind EzSecurity",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": ""
+  },
+  "keywords": [
+    "kibana",
+    "elasticsearch",
+    "authentication",
+    "oauth2",
+    "basic authentication"
+  ],
+  "author": "Fang Li",
+  "contributing-author": "S. Stapleton",
+  "license": "MIT",
+  "copyright": "Funplus Game",
+  "dependencies": {
+    "express": "3.10.5",
+    "passport": "*",
+    "passport-google-oauth": "*",
+    "connect-restreamer": "1.0.0",
+    "xml2js": "0.4.4",
+    "thrift": "0.9.1",
+    "ezbake-thrift-utils": "2.0.0",
+    "ezbake-configuration": "2.0.0",
+    "ezbake-security-client": ">=2.0.1-snapshot.0",
+    "mustache": "0.8.2",
+    "winston": "0.7.3",
+    "redis": "0.10.1",
+    "connect-redis": "1.4.7",
+    "lodash-node": "2.4.1",
+    "ezbake-base-thrift": ">=2.1.0-snapshot",
+    "ezsecurity-services": ">=2.1.0-snapshot",
+    "ezbake-groups-thrift": ">=2.1.0-snapshot"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-uglify": "^0.5.0",
+    "grunt-mkdir": "^0.1.2",
+    "grunt-shell": "^0.7.0",
+    "shortid": "~2.0.1",
+    "grunt-easy-rpm": "~1.4.2"
+  },
+  "bugs": {
+    "url": "https://github.com/fangli/kibana-authentication-proxy/issues"
+  }
+}

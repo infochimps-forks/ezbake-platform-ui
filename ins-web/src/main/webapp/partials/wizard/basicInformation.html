@@ -1,0 +1,90 @@
+<!-- Start Basic Information -->
+<ng-form name="basicForm">
+<div class="form-content" id="regproc-basic-information">
+    <div class=" input-container">
+        <div class="input-label">Application Name</div>
+        <div class="input-field"><input class="input" name="appName" ng-model="currentApplication.appName" ng-required="true" ng-maxlength="16" ng-pattern="/^[a-zA-Z0-9_]+$/" ng-blur="isAppNameExists(currentApplication.appName)"/>
+            <div class="font-red mar-t10 mar-b20">
+                <div ng-show="appNameExists">Application name already exists</div>
+                <div ng-show="basicForm.appName.$error.pattern">Application name can only contain letters, numbers, and underscores</div>
+                <div ng-show="basicForm.appName.$error.maxlength">Application name can only be 20 characters</div>
+                <div ng-show="basicForm.appName.$error.required">Application name is required</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-label">Admin Users</div>
+        <div class="input-field">
+            <ul class="users" id="admin-users-list">
+                <li ng-repeat="user in currentApplication.allowedUsers" class="">
+                    <div class="item-container">{{user}}</div>
+                    <button type="button" class="remove" title="Remove Admin User" alt="Remove Admin User" ng-click="removeUser(user)" ng-hide="user === currentUsername"><span aria-hidden="true" class="icon-remove"></span></button>
+                </li>
+            </ul>
+            <div class="inline">
+                <input class="input additem" name="admins" ng-model="newUser.name" placeholder="User's DN"/>
+            </div>
+            <div class="inline">
+                <button type="button" class="btn plus" title="Add Admin User" alt="Add Admin User" ng-click="addUser(newUser.name)"><span aria-hidden="true" class="icon-plus"></span></button>
+                <span class="help-block">These are the people that will be allowed to update this application later</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-label">Point of Contact Email</div>
+        <div class="input-field"><input type="email" class="input" name="poc" ng-model="currentApplication.poc" ng-required="true"/>
+            <span class="help-block">This should be the primary contact person for any questions regarding this registration request</span>
+            <div class="font-red mar-t10 mar-b20">
+                <div ng-show="basicForm.poc.$error.email">Must be a valid email address</div>
+                <div ng-show="basicForm.poc.$error.required">Email address is required</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-label">Sponsoring Organization</div>
+        <div class="input-field"><input class="input" name="org" ng-model="currentApplication.sponsoringOrganization"/>
+            <span class="help-block">The organization sponsoring this application</span>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-label">Application Authorizations</div>
+        <div class="input-field">
+            <div ng-controller="ModalWindowCtrl" id="ModalWrap">
+                <script type="text/ng-template" id="templateContent">
+                    <dialog-window-node>
+                        <div class="dialog-window-close" ng-click="close()"><span aria-hidden="true" class="icon-close"></span></div>
+                        <div ng-include="'partials/authorizations.html'"></div>
+                    </dialog-window-node>
+                </script>
+                <input type="button" class="input field-btn" name="authsButton" id="authsButton" ng-click="open()" value="Add Authorizations"/>
+                <div id="auths" name="auths" ng-list ng-model="currentApplication.authorizations" ng-required="true" ng-disabled="true" class="mar-t20">{{currentApplication.authorizations.concat(currentApplication.communityAuthorizations).join(", ")}}</div>
+            </div>
+            <div class="font-red mar-t10 mar-b20">
+                <div ng-show="basicForm.auths.$error.required">Authorizations are required</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-container mar-t40">
+        <div class="input-label">Application Icon</div>
+        <div class="input-field">
+            <div ng-controller="FileUploadCtrl" id="importApp" class="import">
+                <div ng-if="showDefaultAppIcon === true"><img id="appIcon" ng-src="{{appIconSrc}}"/></div>
+                <div ng-if="showDefaultAppIcon === false"><img id="appIcon" ng-src="{{currentApplication.appIconSrc}}" /></div>
+                <div class="import-btn-over">
+                    <button class="btn gray fixed-width-btn"><span aria-hidden="true" class="icon-out mar-r10"></span>Upload Image</button>
+                    <input type="file" ng-file-select="uploadAppIcon($files)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="centered mar-t20">
+        <button type="button" ng-disabled="basicForm.$invalid" class="btn large-btn" ng-click="continueRegistration(page)">Continue</button>
+    </div>
+</div>
+</ng-form>

@@ -1,0 +1,21 @@
+Application:
+  name: EzBakeServices
+
+  Services:
+   -
+      type: WebApp
+      web_app_name: EzBakeServicesApp
+      scaling:
+        number_of_instances: 1
+      artifact_info:
+        resources:
+          cpu: small
+          mem: small
+          disk: small
+        language: NodeJs
+      external_web_url: ezbake-services
+      internal_web_url: ezbake-services
+      upload_file_size: 10
+      timeout: 120
+      timeout_retries: 5
+      sticky_session: false

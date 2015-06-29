@@ -1,0 +1,24 @@
+Application:
+  name: ins
+  datasets: []
+  security_id: _Ez_INS_REG
+  auths: []
+
+  Services:
+   -
+      type: WebApp
+      web_app_name: insweb
+      scaling:
+        number_of_instances: 1
+      artifact_info:
+        resources:
+          cpu: small
+          mem: small
+          disk: small
+        language: Java
+        bin: ROOT.war
+      external_web_url: ezbake-registration
+      upload_file_size: 400
+      timeout: 120
+      timeout_retries: 5
+      sticky_session: false

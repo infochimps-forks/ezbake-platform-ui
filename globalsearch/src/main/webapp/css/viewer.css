@@ -1,0 +1,95 @@
+#objectwrapper {
+    font-size: 10pt;
+    color: #858585;
+}
+
+#objectwrapper h1 {
+    font-size: 14pt;
+    line-height: 36px;
+}
+
+#objectwrapper h2 {
+    margin-bottom: 10px;
+}
+
+#objectwrapper h1,
+#objectwrapper h2,
+#objectwrapper h3,
+#objectwrapper h4,
+#objectwrapper h5,
+#objectwrapper h6 {
+    font-weight: normal;
+}
+
+.widget span {
+    color: #3e9ecf;
+}
+
+#main {
+    margin: 39px auto 0 auto;
+    padding: 0 0 0 20px;
+    width: 100%;
+}
+
+.widget {
+    margin: 0 0 28px 0;
+    padding: 0;
+    border: none;
+    background: none;
+    float: left;
+    width: 100%;
+}
+
+.widget h3 {
+    margin: 0;
+    font-size: 10pt;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.widgett {
+    margin: 0;
+    padding: 0;
+    width: 5%;
+    min-width: 200px;
+    min-height: 30px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.widgettext {
+    width: 70%;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.pane {
+    border-left: 8px solid #d7ebf5;
+    border-top: 1px solid #d7ebf5;
+    border-bottom: 1px solid #d7ebf5;
+    padding: 15px 0 0 20px;
+    float: left;
+}
+
+#btnExport {
+    float: right;
+    margin-bottom: 10px;
+    margin-right: 40px;
+    padding: 10px;
+    cursor: pointer;
+    background: #3fa2cf;
+    color: #fff;
+    border: 1px solid #218ab9;
+    width: 54px;
+    height: 36px;
+    text-align: center;
+}
+
+#btnExport:hover {
+    background: #218ab9;
+    text-decoration: none;
+}
+
+#btnExport:focus {
+    outline: none;
+}

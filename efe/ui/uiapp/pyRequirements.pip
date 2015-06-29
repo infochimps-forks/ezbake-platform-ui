@@ -1,0 +1,14 @@
+ezbake-configuration==2.1
+ezbake-discovery==2.1
+ezbake-reverseproxy-thrift==2.1
+ezbake-thrift-utils==2.1
+
+web.py==0.37
+pyopenssl==0.13.1
+
+pyyaml
+netifaces
+gevent
+gevent-socketio
+pycrypto
+

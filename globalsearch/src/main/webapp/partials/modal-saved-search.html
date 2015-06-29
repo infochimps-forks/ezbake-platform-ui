@@ -1,0 +1,20 @@
+<div class="modal-saved-search">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-hidden="true">×</button>
+        <h3>{{title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="input-container">
+            <label>Name</label>
+            <input type="text" name="name" ng-model="record.name"/>
+        </div>
+        <div class="input-container">
+            <label>Search Text</label>
+            <input type="text" readonly name="searchTerm" ng-model="record.searchTerm"/>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+    </div>
+</div>

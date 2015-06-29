@@ -1,0 +1,27 @@
+<div class="comment-wrapper">
+    <script type="text/ng-template" id="modal.html"></script>
+    <div class="modal-header">
+        <h4>Enter Update Comment</h4>
+    </div>
+    <div class="modal-body">
+        <p>
+            Num Objects:
+            <span class="highlight">{{data.objCount}}</span>
+        </p>
+
+        <p>
+            {{data.labelOne}}:
+            <span class="highlight">{{data.valOne}}</span>
+        </p>
+
+        <p>
+            {{data.labelTwo}}:
+        </p>
+        <textarea ng-if="data.rowCount>0" rows="{{data.rowCount}}" class="modalform" ng-model="comment.text"></textarea>
+        <input ng-if="data.rowCount==0" type="password" ng-model="comment.text"/>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()" ng-disabled="inProgress">Cancel</button>
+        <button class="btn btn-primary" ng-click="ok()" ng-disabled="inProgress">Submit</button>
+    </div>
+</div>

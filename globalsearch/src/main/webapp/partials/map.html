@@ -1,0 +1,28 @@
+<div id="mapContainer">
+    <div class="container">
+        <!--
+            I don't see the purpose of this right now.  Just commenting out in case I change my mind
+                <div ng-show="resultObject.mapResults && resultObject.mapResults.length > 0">
+                    <div class="results" id="mapResults" content-height-resize>
+                        <div class="map-results" ng-repeat="result in resultObject.mapResults" draggable>
+                            <div class="results-map-info">
+                                <a href="#">{{result.title}}</a>
+                                <p>{{result.description | words:25}}</p>
+                                <p>{{result.updated}}</p>
+                            </div>
+                        </div>
+                        <div id="pages">
+                            <a class="icon-pages" href="#" ng-show="resultObject.map_page > 0" ng-click="resultObject.map_page = resultObject.map_page - 1; search('',true)">&lt;</a>
+                            <a class="pages-active">{{resultObject.map_page + 1}}</a>
+                            <a class="icon-pages" href="#" ng-show="mapResults == resultObject.searchDetails.page_results && resultObject.map_page < resultObject.searchDetails.web_pages" ng-click="resultObject.map_page = resultObject.map_page + 1; search('',true)">&gt;</a>
+                        </div>
+                    </div>
+                </div>
+        -->
+        <div ng-show="resultObject.mapResults == undefined || resultObject.mapResults.length == 0" class="no-data-msg">
+            No geospatial results to display.
+        </div>
+        <div class="map" id="map" content-height-resize map-resize style="width:99%">
+        </div>
+    </div>
+</div>

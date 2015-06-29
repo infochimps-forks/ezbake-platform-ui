@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>View Purge and AgeOff Events
+</h2>
+<div class="row">
+    <div class="onoffswitch col-md-2">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked ng-change="changeTypes()" ng-model="onoffswitchValue">
+        <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+        </label>
+    </div>
+    <div class="col-md-2 text-right floatright">
+
+        <button class="btn refresh floatright" ng-click="refresh()" style="z-index:1000"><i
+                class="fa fa-refresh"></i></button>
+        <div class="dropdown keep-open">
+            <button class="dropdown-toggle btn floatright" data-toggle="dropdown">Filter by <b
+                    class="caret"></b>
+            </button>
+            <ul class="dropdown-menu filter">
+                <li style="">
+                    <label ng-repeat="(s, enabled) in statuses" class="filterbox">
+                        <input type="checkbox" ng-model="statuses[s]" ng-change="refresh()">
+                        {{s}}
+                        <br>
+                    </label>
+                </li>
+            </ul>
+            </li>
+        </div>
+
+
+            <script type="text/javascript">
+                //Keep Dropdown Open
+                $( document ).ready(function() {
+                    $('.keep-open').on({
+                        "click":function(e){
+                            e.stopPropagation();
+                        }
+                    });
+                });
+            </script>
+
+    </div>
+</div>
+<div>
+    <table class="wh-table table">
+        <thead>
+        <tr>
+            <th class="purgeIds">PurgeId</th>
+            <th class="name">Name</th>
+            <th class="purgeStatus">Purge Status</th>
+            <th class="user">User</th>
+            <th class="timestamp">Timestamp</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="purges in purgeMap">
+            <td class="purgeId" > <a ng-href="#/purge/status/{{purges.id}}"> {{purges.id}} </a> </td>
+            <td class="name">{{purges.name}}</td>
+            <td class="purgeStatus">{{purges.centralPurgeStatus}}</td>
+            <td class="user">{{purges.user}}</td>
+            <td class="timestamp">{{purges.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div >
+    <div class="pagingDiv" nghide="length==0" style="text-align: center">
+        <!-- TODO remove hard coded page size -->
+        <a ng-click="decrementPage()" ng-show="pageNumber > 1" style="cursor: pointer;">&lt;</a>
+        &nbsp;{{pageNumber}}&nbsp;
+        <a ng-click="incrementPage()" ng-show="length > (pageNumber) * 10" style="cursor: pointer;">&gt;</a>
+    </div>
+</div>
+</body>
+</html>

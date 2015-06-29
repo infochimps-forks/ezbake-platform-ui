@@ -1,0 +1,199 @@
+<!--
+/* Copyright (C) 2013-2014 Computer Sciences Corporation
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License. */
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <classification-banner></classification-banner>
+
+@element classification-banner
+@blurb Provides a classification banner with colors and text pulled from the ezconfig webservice.
+@status alpha
+@homepage http://
+-->
+<polymer-element name="classification-banner" attributes="notitle author">
+
+  <template>
+
+    <link rel="stylesheet" href="classification-banner.css" />
+    <div id="classification-banner-top">
+      <span id="classification-banner-text"></span>
+    </div>
+
+  </template>
+
+  <script>
+    var isObject = function (input) {
+        return ((input !== undefined && input !== null) && Object.prototype.toString.call(input) === "[object Object]");
+    };
+
+    var isArray = function (input) {
+        return ((input !== undefined && input !== null) && Object.prototype.toString.call(input) === "[object Array]");
+    };
+
+    var ajax = function (options) {
+        if (options === undefined || options.method === undefined || options.url === undefined) {
+            return;
+        }
+        var numTries = 0,
+            maxTries = (typeof options.retries == 'number') ? options.retries : 3;
+        try {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                var url;
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200 || xhr.status === 201) {
+                        if (options.success !== undefined) {
+                            var resp;
+                            if (xhr.response) {
+                                resp = xhr.response;
+                            } else if (xhr.responseText) { //Add IE9 support
+                                resp = JSON.parse(xhr.responseText);
+                            }
+                            options.success.apply((options.context || this), [xhr.status, resp]);
+                        }
+                    } else if (xhr.status === 401) {
+                        if (options.error !== undefined || options.failure !== undefined) {
+                           (options.error || options.failure).apply((options.context || this), [xhr.status, xhr.response]);
+                       }
+                    } else if (xhr.status === 403) {
+                        if (options.error !== undefined || options.failure !== undefined) {
+                           (options.error || options.failure).apply((options.context || this), [xhr.status, xhr.response]);
+                        }
+                    } else {
+                        if (xhr.status == 0 && (options.method == 'GET' || options.method == 'OPTIONS') && numTries++ < maxTries) {
+                            url = createUrl();
+                            xhr.open(options.method, url);
+                            if (isObject(options.data) || isArray(options.data)) {
+                                xhr.setRequestHeader("Content-Type", "application/json");
+                                xhr.send(JSON.stringify(options.data));
+                            } else {
+                                xhr.send(options.data);
+                            }
+                        } else {
+                            if (options.error !== undefined || options.failure !== undefined) {
+                                (options.error || options.failure).apply((options.context || this), [xhr.status, xhr.response]);
+                            }
+                        }
+                    }
+                }
+            };
+
+            if (options.progress !== undefined) {
+                xhr.addEventListener("progress", options.progress);
+            }
+
+            xhr.withCredentials = (options.withCredentials !== undefined) ? options.withCredentials : true;
+
+            var query = [];
+            if (options.query !== undefined) {
+                for (var key in options.query) {
+                    if (options.query.hasOwnProperty(key)) {
+                        var opt = options.query[key];
+                        if (!isArray(opt)) {
+                            opt = [opt];
+                        }
+                        for (var i = 0; i < opt.length; ++i) {
+                            query.push(key + "=" + options.query[key]);
+                        }
+                    }
+                }
+            }
+
+            var queryString = ((query.length > 0) ? "&" + query.join("&") : "");
+            function createUrl () {
+                var url = options.url;
+                if (options.allowCaching !== true) {
+                    url = url + "?=_" + (new Date().getTime());
+                }
+                url = url + queryString;
+                return url;
+            }
+            xhr.open(options.method, createUrl());
+            xhr.timeout = (options.timeout !== undefined) ? options.timeout : 10000;
+            xhr.responseType = (options.type !== undefined) ? options.type : "json";
+
+            if (isObject(options.data) || isArray(options.data)) {
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify(options.data));
+            } else {
+                xhr.send(options.data);
+            }
+        } catch (ex) {
+            if (options.error !== undefined || options.failure !== undefined) {
+                (options.error || options.failure).apply((options.context || this), [ex]);
+            }
+        }
+    };
+
+    Polymer({
+      /**
+       * The `author` attribute sets an initial author
+       *
+       * @attribute author
+       * @type string
+       * @default 'Jerry Conner'
+       */
+      author: 'Jerry Conner',
+
+      /**
+       * `fancy` is a property that does something fancy.
+       *
+       * @property fancy
+       * @type bool
+       * @default false
+       */
+      fancy: false,
+
+      ready: function() {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+        var banner = this.shadowRoot.querySelector("#classification-banner-top");
+        var bannerText = this.shadowRoot.querySelector("#classification-banner-text");
+        var renderFail = function () {
+            bannerText.innerHTML = "Not found";
+            bannerText.style.color = "red";
+            banner.style.background = "yellow";
+        }
+        ajax({
+            url: "/ezbake-webservice/ezconfiguration",
+            method: "GET",
+            success: function (status, response) {
+                if (!response["web.application.security.banner.text"] ||
+                    !response["web.application.security.banner.background.color"] ||
+                    !response["web.application.security.banner.text.color"]) {
+                        renderFail();
+                    } else {
+                        bannerText.innerHTML = response["web.application.security.banner.text"];
+                        bannerText.style.color = response["web.application.security.banner.text.color"];
+                        banner.style.background = response["web.application.security.banner.background.color"];
+                    }
+            },
+            failure: function (status, response) {
+                renderFail();
+            }
+        });
+      }
+    });
+
+  </script>
+
+</polymer-element>
