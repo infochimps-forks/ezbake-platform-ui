@@ -236,4 +236,38 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>rpmbuild</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>rpm-maven-plugin</artifactId>
+                            <version>2.1.1</version>
+                            <executions>
+                                <execution>
+                                    <id>generate-rpm</id>
+                                    <goals>
+                                        <goal>rpm</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                            <configuration>
+                                <name>ezbake-${project.artifactId}</name>
+                                <description>${project.name} RPM</description>
+                                <group>ezbake</group>
+                                <release>${buildNumber}</release>
+                                <needarch>false</needarch>
+                                <vendor>EzBake.IO</vendor>
+                                <license>ASL 2.0</license>
+			    </configuration>
+			</plugin>
+		    </plugins>
+		</pluginManagement>
+	    </build>
+	</profile>
+    </profiles>
 </project>
