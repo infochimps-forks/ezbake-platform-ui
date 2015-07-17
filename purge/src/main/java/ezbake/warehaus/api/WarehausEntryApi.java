@@ -16,7 +16,7 @@ import ezbake.services.centralPurge.thrift.*;
 import ezbake.services.provenance.thrift.*;
 import ezbake.services.search.SSRSearchResult;
 import ezbake.services.search.ssrService;
-import ezbake.services.search.ssrServiceConstants;
+import ezbake.services.search.SsrServiceConstants;
 import ezbake.thrift.ThriftClientPool;
 import ezbake.warehaus.EntryNotInWarehausException;
 import ezbake.warehaus.VersionDetail;
@@ -155,10 +155,10 @@ public class WarehausEntryApi {
       ssrService.Client client = null;
       SSRSearchResult result = null;
       try {
-         client = pool.getClient(ssrServiceConstants.SERVICE_NAME, ssrService.Client.class);
+         client = pool.getClient(SsrServiceConstants.SERVICE_NAME, ssrService.Client.class);
          String search = QueryBuilders.idsQuery().addIds(uri).toString();
          Query query = new Query().setSearchString(search).setPage(new Page().setOffset(0).setPageSize((short)5));
-         result = client.searchSSR(query, getToken(ssrServiceConstants.SERVICE_NAME));
+         result = client.searchSSR(query, getToken(SsrServiceConstants.SERVICE_NAME));
       } finally {
          pool.returnToPool(client);
       }
