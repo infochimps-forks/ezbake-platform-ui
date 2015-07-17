@@ -91,7 +91,6 @@
                 <!-- For information on this plugin, see: https://github.com/eirslett/frontend-maven-plugin -->
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>0.0.20</version>
                 <!-- Specify the location of our package.json & Gulpfile.js -->
                 <configuration>
                     <workingDirectory>src/main/webapp</workingDirectory>
