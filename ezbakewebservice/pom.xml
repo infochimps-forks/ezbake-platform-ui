@@ -133,9 +133,6 @@
 
     <profiles>
         <profile>
-            <id>native-build</id>
-	</profile>
-        <profile>
             <id>rpmbuild</id>
             <build>
                 <plugins>
