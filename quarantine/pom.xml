@@ -10,9 +10,9 @@
 
     <artifactId>quarantine-rest</artifactId>
     <packaging>war</packaging>
-    
+
     <dependencies>
-         <!-- Third-Party dependencies -->
+        <!-- Third-Party dependencies -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -42,8 +42,8 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version> <!-- TODO sync with parent pom version -->
         </dependency>
-        
-         <!-- EzBake dependencies -->
+
+        <!-- EzBake dependencies -->
         <dependency>
             <groupId>ezbake</groupId>
             <artifactId>quarantine-client</artifactId>
@@ -70,4 +70,41 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>rpmbuild</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>rpm-maven-plugin</artifactId>
+                        <configuration>
+                            <provides>
+                                <provide>${project.artifactId} = ${project.version}</provide>
+                            </provides>
+                            <mappings combine.self="override">
+                                <mapping>
+                                    <directory>/opt/ezbake/${project.artifactId}</directory>
+                                    <filemode>644</filemode>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <sources>
+                                        <source><location>target/quarantine.war</location></source>
+                                        <source><location>src/main/resources/quarantine-manifest.yml</location></source>
+                                    </sources>
+                                </mapping>
+                            </mappings>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
