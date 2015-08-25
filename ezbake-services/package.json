@@ -17,14 +17,14 @@
     "hapi": "^6.2.0",
     "msngr": "^0.3.0",
     "ejs": "^1.0.0",
-    "ezbake-configuration": "2.0.0",
-    "ezbake-security-client": "2.0.0",
-    "ezbake-thrift-utils": "2.0.0",
+    "ezbake-configuration": "2.1.0",
+    "ezbake-security-client": "2.1.0",
+    "ezbake-thrift-utils": "2.1.0",
     "thrift": "^0.9.1",
     "async": "^0.9.0"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
+    "grunt": "~0.4.5",
     "chai": "^1.9.1",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-concat": "^0.5.0",
@@ -34,5 +34,6 @@
     "grunt-vulcanize": "^0.5.0",
     "grunt-available-tasks": "^0.5.0",
     "ofe": "~0.1.2"
-  }
+  },
+  "license": "BSD"
 }

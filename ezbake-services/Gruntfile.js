@@ -259,7 +259,7 @@ module.exports = (function (grunt) {
 
     grunt.registerTask("fetchThrifts", function () {
         var done = this.async();
-        execute("git", ["clone", "git@github.com:ezbake/ezbake-thrift.git", ".tmp"], "./", function () {
+        execute("git", ["clone", "-b", "2.1release", "https://github.com/infochimps-forks/ezbake-thrift.git", ".tmp"], "./", function () {
             done();
         });
     });
