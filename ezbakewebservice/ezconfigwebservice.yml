@@ -5,6 +5,7 @@ Application:
   -
      type: WebApp
      web_app_name: ezconfigws
+     security_id: -1
      scaling:
        number_of_instances: 1
      artifact_info:

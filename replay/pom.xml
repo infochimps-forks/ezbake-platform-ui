@@ -171,10 +171,11 @@
                                     <directoryIncluded>false</directoryIncluded>
                                     <sources>
 				      <softlinkSource>
-					<location>target/replay.war</location>
+					<location>replay.war</location>
 					<destination>ROOT.war</destination>
 				      </softlinkSource>
                                       <source><location>registration.yml</location></source>
+                                      <source><location>target/replay.war</location></source>
                                     </sources>
                                 </mapping>
                             </mappings>

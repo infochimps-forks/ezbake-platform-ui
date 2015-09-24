@@ -158,10 +158,11 @@
                                     <directoryIncluded>false</directoryIncluded>
                                     <sources>
 				      <softlinkSource>
-					<location>target/purge.war</location>
+					<location>purge.war</location>
 					<destination>ROOT.war</destination>
 				      </softlinkSource>
                                       <source><location>registration.yml</location></source>
+                                      <source><location>target/purge.war</location></source>
                                     </sources>
                                 </mapping>
                             </mappings>
