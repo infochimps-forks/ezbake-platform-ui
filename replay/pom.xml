@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>ezbake</groupId>
         <artifactId>ezbake-platform-ui-parent</artifactId>
         <version>2.1</version>
     </parent>
-    
+
     <artifactId>replay-web</artifactId>
     <packaging>war</packaging>
 
@@ -22,7 +22,7 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
          <!-- EzBake dependencies -->
         <dependency>
             <groupId>ezbake</groupId>
@@ -142,26 +142,6 @@
                                     <groupname>ezbake</groupname>
                                     <filemode>755</filemode>
                                     <directoryIncluded>true</directoryIncluded>
-                                </mapping>
-                                <mapping>
-                                    <directory>/opt/ezbake/staging/${project.artifactId}/config</directory>
-                                    <username>ezbake</username>
-                                    <groupname>ezbake</groupname>
-                                    <filemode>755</filemode>
-				    <configuration/>
-                                    <directoryIncluded>true</directoryIncluded>
-                                </mapping>
-                                <mapping>
-                                    <directory>/opt/ezbake/staging/${project.artifactId}/config</directory>
-                                    <username>ezbake</username>
-                                    <groupname>ezbake</groupname>
-                                    <filemode>640</filemode>
-                                    <directoryIncluded>false</directoryIncluded>
-                                    <sources>
-                                        <source>
-                                            <location>${project.build.scriptSourceDirectory}/config</location>
-                                        </source>
-                                    </sources>
                                 </mapping>
                                 <mapping>
                                     <directory>/opt/ezbake/staging/${project.artifactId}</directory>
