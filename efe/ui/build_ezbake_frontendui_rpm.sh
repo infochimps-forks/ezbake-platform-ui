@@ -33,7 +33,7 @@ CONFIG_FILES="--config-files /opt/ezfrontend-ui/authorized_users.yaml"
 #run generate binaries with pyinstaller
 PYINST_DIR=`mktemp -d $CWD/pyinstaller_XXX`
 echo_and_execute_cmd "mkdir -p $PYINST_DIR"
-echo_and_execute_cmd "sudo env PATH=$PATH pip install --pre -r $APP_PATH/pyRequirements.pip"
+echo_and_execute_cmd "pip install --pre -r $APP_PATH/pyRequirements.pip"
 echo_and_execute_cmd "pyinstaller --distpath=$APP_CONTAINER/ --workpath=$PYINST_DIR -y --specpath=$PYINST_DIR --paths=$APP_PATH $APP_PATH/ezfrontendui.py --hidden-import=pkg_resources"
 echo_and_execute_cmd "rm -rf $PYINST_DIR"
 
